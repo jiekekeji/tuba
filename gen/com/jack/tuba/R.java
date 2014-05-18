@@ -11,10 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int actionbar_color=0x7f040005;
         public static final int black=0x7f040003;
         public static final int dark_slate_gray=0x7f040000;
+        public static final int drawer_arrow_second_color=0x7f040006;
         public static final int gray_1=0x7f040002;
         public static final int gray_2=0x7f040001;
+        public static final int ldrawer_color=0x7f040004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -24,12 +27,18 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
+        public static final int ldrawer_barSize=0x7f050003;
+        public static final int ldrawer_drawableSize=0x7f050002;
+        public static final int ldrawer_gapBetweenBars=0x7f050006;
+        public static final int ldrawer_middleBarArrowSize=0x7f050007;
+        public static final int ldrawer_thickness=0x7f050005;
+        public static final int ldrawer_topBottomBarArrowSize=0x7f050004;
     }
     public static final class drawable {
-        public static final int costum_progress_bar=0x7f020000;
-        public static final int empty_photo=0x7f020001;
+        public static final int empty_photo=0x7f020000;
+        public static final int ic_drawer=0x7f020001;
         public static final int ic_empty=0x7f020002;
         public static final int ic_error=0x7f020003;
         public static final int ic_launcher=0x7f020004;
@@ -37,40 +46,55 @@ public final class R {
         public static final int ic_stub=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000b;
-        public static final int iv_item_image_list_big=0x7f090002;
-        public static final int list=0x7f090000;
-        public static final int load_more_footer=0x7f090003;
-        public static final int load_more_progressBar=0x7f090005;
-        public static final int pull_to_refresh_header=0x7f090006;
-        public static final int pull_to_refresh_image=0x7f090008;
-        public static final int pull_to_refresh_progress=0x7f090007;
-        public static final int pull_to_refresh_text=0x7f090009;
-        public static final int pull_to_refresh_updated_at=0x7f09000a;
-        public static final int recommend_listview=0x7f090001;
-        public static final int top_line=0x7f090004;
+        public static final int action_settings=0x7f090011;
+        public static final int drawer_icon=0x7f090004;
+        public static final int drawer_layout=0x7f090000;
+        public static final int drawer_title=0x7f090005;
+        public static final int image_title=0x7f090006;
+        public static final int iv_item_image_list_big=0x7f090007;
+        public static final int list=0x7f090001;
+        public static final int load_more_footer=0x7f090009;
+        public static final int load_more_progressBar=0x7f09000b;
+        public static final int more_image=0x7f090008;
+        public static final int navdrawer=0x7f090002;
+        public static final int pull_to_refresh_header=0x7f09000c;
+        public static final int pull_to_refresh_image=0x7f09000e;
+        public static final int pull_to_refresh_progress=0x7f09000d;
+        public static final int pull_to_refresh_text=0x7f09000f;
+        public static final int pull_to_refresh_updated_at=0x7f090010;
+        public static final int recommend_listview=0x7f090003;
+        public static final int top_line=0x7f09000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int fragment_car=0x7f030001;
         public static final int fragment_scenery=0x7f030002;
         public static final int fragment_star=0x7f030003;
-        public static final int item_image_listview=0x7f030004;
-        public static final int load_more_footer=0x7f030005;
-        public static final int pull_to_refresh_header=0x7f030006;
+        public static final int item_drawer_list=0x7f030004;
+        public static final int item_image_listview=0x7f030005;
+        public static final int load_more_footer=0x7f030006;
+        public static final int pull_to_refresh_header=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050007;
-        public static final int app_name=0x7f050001;
-        public static final int hello=0x7f050000;
-        public static final int hello_world=0x7f050006;
-        public static final int pull_to_refresh_pull_label=0x7f050002;
-        public static final int pull_to_refresh_refreshing_label=0x7f050004;
-        public static final int pull_to_refresh_release_label=0x7f050003;
-        public static final int pull_to_refresh_tap_label=0x7f050005;
+        public static final int action_settings=0x7f060002;
+        public static final int app_description=0x7f060007;
+        public static final int app_name=0x7f060000;
+        public static final int drawer_close=0x7f060009;
+        public static final int drawer_open=0x7f060008;
+        public static final int drawer_titile1=0x7f06000a;
+        public static final int drawer_title2=0x7f06000b;
+        public static final int drawer_title3=0x7f06000c;
+        public static final int drawer_title4=0x7f06000d;
+        public static final int drawer_title5=0x7f06000e;
+        public static final int drawer_title6=0x7f06000f;
+        public static final int hello_world=0x7f060001;
+        public static final int pull_to_refresh_pull_label=0x7f060003;
+        public static final int pull_to_refresh_refreshing_label=0x7f060005;
+        public static final int pull_to_refresh_release_label=0x7f060004;
+        public static final int pull_to_refresh_tap_label=0x7f060006;
     }
     public static final class style {
         /** 

@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jack.tuba.R;
 import com.jack.tuba.domain.Result;
@@ -79,8 +81,10 @@ public class CommonAdapter extends BaseAdapter{
 		if (convertView == null) {
 			view = inflater.inflate(R.layout.item_image_listview, parent, false);
 			holder = new ViewHolder();
-//			holder.text = (TextView) view.findViewById(R.id.text);
+			holder.title = (TextView) view.findViewById(R.id.image_title);
 			holder.image = (ImageView) view.findViewById(R.id.iv_item_image_list_big);
+			holder.moreUrl=(TextView) view.findViewById(R.id.more_image);
+			
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
@@ -99,6 +103,12 @@ public class CommonAdapter extends BaseAdapter{
 			holder.image.getLayoutParams().width=displayWidth;
 			holder.image.getLayoutParams().height=(int) (imageHeight*sca);
 		}
+//		holder.title.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+//		holder.title.getLayoutParams().height=45;
+//		
+//		holder.moreUrl.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+//		holder.moreUrl.getLayoutParams().height=45;
+		
 	
 		ImageLoader.getInstance().displayImage(results.get(position).getUrl(), 
 				holder.image,
@@ -115,8 +125,9 @@ public class CommonAdapter extends BaseAdapter{
 	}
 	
 	private static class ViewHolder {
-//		TextView text;
+		TextView title;
 		ImageView image;
+		TextView moreUrl;
 	}
 	
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {

@@ -2,15 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_horizontal_margin"
     tools:context="com.jack.imageba.MainActivity" >
 
-    <ImageView 
+    <TextView
+        android:id="@+id/image_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
+
+    <ImageView
         android:id="@+id/iv_item_image_list_big"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_title" />
 
-
+    <TextView
+        android:id="@+id/more_image"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/iv_item_image_list_big"
+        android:text="TextView" />
 
 </RelativeLayout>

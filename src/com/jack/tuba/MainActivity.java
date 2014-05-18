@@ -2,23 +2,27 @@ package com.jack.tuba;
 
 import java.util.LinkedList;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
-import com.costum.android.widget.PullAndLoadListView;
-import com.costum.android.widget.PullAndLoadListView.OnLoadMoreListener;
-import com.costum.android.widget.PullToRefreshListView.OnRefreshListener;
 import com.jack.tuba.adapter.CommonAdapter;
 import com.jack.tuba.app.TuBaApp;
 import com.jack.tuba.domain.Result;
 import com.jack.tuba.utils.LoadDataTask;
 import com.jack.tuba.utils.LoadDataTask.OnLoadDataListener;
 import com.jack.tuba.utils.TubaUtils;
+import com.jack.tuba.widget.PullAndLoadListView;
+import com.jack.tuba.widget.PullAndLoadListView.OnLoadMoreListener;
+import com.jack.tuba.widget.PullToRefreshListView.OnRefreshListener;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 
 public class MainActivity extends Activity implements OnRefreshListener, OnLoadMoreListener, OnLoadDataListener {
 
@@ -27,13 +31,23 @@ public class MainActivity extends Activity implements OnRefreshListener, OnLoadM
 	private DisplayImageOptions options;
 	private PullAndLoadListView mListView;
 	private boolean pullOrLoad;
+    
 	private CommonAdapter mCommonAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initOptions();
+		initActionBar();
 		initView();
+	}
+	
+	@SuppressLint("NewApi")
+	private void initActionBar() {
+		// TODO Auto-generated method stub
+		ActionBar ab=getActionBar();
+		ab.setDisplayHomeAsUpEnabled(true);
+		ab.setHomeButtonEnabled(true);
 	}
 
 	private void initView() {
@@ -135,5 +149,14 @@ public class MainActivity extends Activity implements OnRefreshListener, OnLoadM
 		mListView.onLoadMoreComplete();
 		mListView.onRefreshComplete();
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+
 
 }
