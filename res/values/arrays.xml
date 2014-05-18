@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_item">
+　　        <item>我的下载</item>
+　　        <item>应用推荐</item>
+　　        <item>关于我们</item>
+　　        <item>意见反馈</item>
+　　        <item>设置中心</item>
+      <item >查找更多</item>
+　　    </string-array>   
+</resources>

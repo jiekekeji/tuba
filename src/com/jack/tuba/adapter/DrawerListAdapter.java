@@ -12,12 +12,21 @@ import com.jack.tuba.R;
 
 public class DrawerListAdapter extends BaseAdapter{
 
-	private int[] titles={R.string.drawer_titile1,
-			R.string.drawer_title2,
-			R.string.drawer_title3,
-			R.string.drawer_title4,
-			R.string.drawer_title5,
-			R.string.drawer_title6};
+//	private int[] titles={R.string.drawer_titile1,
+//			R.string.drawer_title2,
+//			R.string.drawer_title3,
+//			R.string.drawer_title4,
+//			R.string.drawer_title5,
+//			R.string.drawer_title6};
+	String[] values = new String[]{
+            "Stop Animation (Back icon)",
+            "Stop Animation (Home icon)",
+            "Start Animation",
+            "Change Color",
+            "GitHub Page",
+            "Share",
+            "Rate"
+        };
 	
 //	private int[] icons={android.R.drawable.stat_sys_download,
 //			android.R.drawable.stat_sys_download,
@@ -36,7 +45,7 @@ public class DrawerListAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return titles.length;
+		return values.length;
 	}
 
 	@Override
@@ -65,7 +74,7 @@ public class DrawerListAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
-		holder.text.setText(titles[position]);
+		holder.text.setText(values[position]);
 //		holder.image.setImageResource(icons[position]);
 		
 		return null;
