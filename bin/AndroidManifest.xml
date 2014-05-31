@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity 
+            android:name=".ImageDetailActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar">
+            
+        </activity>
     </application>
     <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.jack.tuba" android:label="Testing" />
 

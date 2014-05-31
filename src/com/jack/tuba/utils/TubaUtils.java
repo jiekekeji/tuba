@@ -25,6 +25,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.view.WindowManager;
+import android.widget.Toast;
 public class TubaUtils {
 	
 	/**
@@ -266,5 +267,14 @@ public class TubaUtils {
 			sb.append(line + "\n");
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Toast
+	 * @param context
+	 * @param text
+	 */
+	public void MyToast(Context context,String text) {
+		Toast.makeText(context, text, Toast.LENGTH_SHORT);
 	}
 }

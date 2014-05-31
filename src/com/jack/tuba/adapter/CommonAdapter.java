@@ -9,14 +9,14 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jack.tuba.R;
 import com.jack.tuba.domain.Result;
+import com.jack.tuba.widget.ListTextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -73,7 +73,7 @@ public class CommonAdapter extends BaseAdapter{
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		Log.i(TAG, "CommonAdapter=="+results.get(position).getUrl());
 		View view = convertView;
@@ -81,15 +81,33 @@ public class CommonAdapter extends BaseAdapter{
 		if (convertView == null) {
 			view = inflater.inflate(R.layout.item_image_listview, parent, false);
 			holder = new ViewHolder();
-			holder.title = (TextView) view.findViewById(R.id.image_title);
+			holder.title = (ListTextView) view.findViewById(R.id.image_title);
 			holder.image = (ImageView) view.findViewById(R.id.iv_item_image_list_big);
-			holder.moreUrl=(TextView) view.findViewById(R.id.more_image);
+			holder.moreUrl=(ListTextView) view.findViewById(R.id.more_image);
 			
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
 		
+		holder.title.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.i(TAG, "TitleNoFormatting"+results.get(position).getTitleNoFormatting());
+			}
+		});
+		
+		holder.moreUrl.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.i(TAG, "OriginalContextUrl"+results.get(position).getOriginalContextUrl());
+			}
+		});
+				
 		int imageHeight=results.get(position).getHeight();
 		int imageWidth=results.get(position).getWidth();
 		
@@ -109,7 +127,9 @@ public class CommonAdapter extends BaseAdapter{
 //		holder.moreUrl.getLayoutParams().width=LayoutParams.MATCH_PARENT;
 //		holder.moreUrl.getLayoutParams().height=45;
 		
-	
+	    holder.title.setText(results.get(position).getTitleNoFormatting());
+	    holder.moreUrl.setText("图片来源："+results.get(position).getOriginalContextUrl());
+		
 		ImageLoader.getInstance().displayImage(results.get(position).getUrl(), 
 				holder.image,
 				options, 
@@ -125,9 +145,9 @@ public class CommonAdapter extends BaseAdapter{
 	}
 	
 	private static class ViewHolder {
-		TextView title;
+		ListTextView title;
 		ImageView image;
-		TextView moreUrl;
+		ListTextView moreUrl;
 	}
 	
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {

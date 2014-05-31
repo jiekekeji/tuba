@@ -1,0 +1,46 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <uk.co.senab.photoview.PhotoView
+            android:id="@+id/iv_photo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <RelativeLayout
+            android:id="@+id/tv_current_matrix"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="42dp"
+                android:src="@drawable/ic_pulltorefresh_arrow" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_pulltorefresh_arrow" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="46dp"
+                android:src="@drawable/ic_pulltorefresh_arrow" />
+
+       </RelativeLayout>
+    </FrameLayout>
+
+</merge>

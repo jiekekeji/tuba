@@ -2,17 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
     tools:context="com.jack.imageba.MainActivity" >
 
-    <TextView
+    <com.jack.tuba.widget.ListTextView
         android:id="@+id/image_title"
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical" 
         android:text="TextView" />
 
     <ImageView
@@ -23,12 +21,14 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/image_title" />
 
-    <TextView
+    <com.jack.tuba.widget.ListTextView
         android:id="@+id/more_image"
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@+id/iv_item_image_list_big"
+        
         android:text="TextView" />
 
 </RelativeLayout>
