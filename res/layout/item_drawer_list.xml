@@ -1,22 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ldrawer_selector"
     android:layout_height="40dp">
-
-    <ImageView
-        android:id="@+id/drawer_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
-
     <TextView
-        android:id="@+id/drawer_title"
+        android:id="@+id/drawerlist_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
         android:layout_centerVertical="true"
+        android:textColor="@color/black"
         android:text="Large Text"
+        android:background="@android:color/transparent"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

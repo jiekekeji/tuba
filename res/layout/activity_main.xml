@@ -7,6 +7,9 @@
 
     <com.jack.tuba.widget.PullAndLoadListView
         android:id="@+id/list"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:background="@drawable/lv_image_selector"       
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
@@ -16,10 +19,10 @@
         android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
+        android:background="@color/gray_1"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
+        android:dividerHeight="8dp"
         android:drawSelectorOnTop="false">
     </ListView>
 

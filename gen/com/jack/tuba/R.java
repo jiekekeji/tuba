@@ -21,6 +21,8 @@ public final class R {
         public static final int gray_1=0x7f050002;
         public static final int gray_2=0x7f050001;
         public static final int ldrawer_color=0x7f050004;
+        public static final int light_white=0x7f050008;
+        public static final int white=0x7f050007;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -46,64 +48,74 @@ public final class R {
         public static final int ic_error=0x7f020003;
         public static final int ic_launcher=0x7f020004;
         public static final int ic_pulltorefresh_arrow=0x7f020005;
-        public static final int ic_stub=0x7f020006;
+        public static final int image_detail_selector=0x7f020006;
+        public static final int ldrawer_selector=0x7f020007;
+        public static final int lv=0x7f020008;
+        public static final int lv_image_selector=0x7f020009;
+        public static final int nomal=0x7f02000a;
+        public static final int pressed=0x7f02000b;
+        public static final int text_selector=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0016;
-        public static final int drawer_icon=0x7f0a0009;
-        public static final int drawer_layout=0x7f0a0005;
-        public static final int drawer_title=0x7f0a000a;
-        public static final int imageView1=0x7f0a0002;
-        public static final int imageView2=0x7f0a0003;
-        public static final int imageView3=0x7f0a0004;
-        public static final int image_title=0x7f0a000b;
-        public static final int iv_item_image_list_big=0x7f0a000c;
+        public static final int action_download=0x7f0a0012;
+        public static final int action_search=0x7f0a0013;
+        public static final int action_setphoto=0x7f0a0011;
+        public static final int action_share=0x7f0a0010;
+        public static final int drawer_layout=0x7f0a0001;
+        public static final int drawerlist_item=0x7f0a0004;
+        public static final int image_title=0x7f0a0005;
+        public static final int iv_item_image_list_big=0x7f0a0006;
         public static final int iv_photo=0x7f0a0000;
-        public static final int list=0x7f0a0006;
-        public static final int load_more_footer=0x7f0a000e;
-        public static final int load_more_progressBar=0x7f0a0010;
-        public static final int more_image=0x7f0a000d;
-        public static final int navdrawer=0x7f0a0007;
-        public static final int pull_to_refresh_header=0x7f0a0011;
-        public static final int pull_to_refresh_image=0x7f0a0013;
-        public static final int pull_to_refresh_progress=0x7f0a0012;
-        public static final int pull_to_refresh_text=0x7f0a0014;
-        public static final int pull_to_refresh_updated_at=0x7f0a0015;
-        public static final int recommend_listview=0x7f0a0008;
-        public static final int top_line=0x7f0a000f;
-        public static final int tv_current_matrix=0x7f0a0001;
+        public static final int list=0x7f0a0002;
+        public static final int load_more_footer=0x7f0a0008;
+        public static final int load_more_progressBar=0x7f0a000a;
+        public static final int more_image=0x7f0a0007;
+        public static final int navdrawer=0x7f0a0003;
+        public static final int pull_to_refresh_header=0x7f0a000b;
+        public static final int pull_to_refresh_image=0x7f0a000d;
+        public static final int pull_to_refresh_progress=0x7f0a000c;
+        public static final int pull_to_refresh_text=0x7f0a000e;
+        public static final int pull_to_refresh_updated_at=0x7f0a000f;
+        public static final int top_line=0x7f0a0009;
     }
     public static final class layout {
-        public static final int activity_imagedetail=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int fragment_car=0x7f030002;
-        public static final int fragment_scenery=0x7f030003;
-        public static final int fragment_star=0x7f030004;
-        public static final int item_drawer_list=0x7f030005;
-        public static final int item_image_listview=0x7f030006;
-        public static final int load_more_footer=0x7f030007;
-        public static final int pull_to_refresh_header=0x7f030008;
+        public static final int activity_about=0x7f030000;
+        public static final int activity_help=0x7f030001;
+        public static final int activity_imagedetail=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_mydownload=0x7f030004;
+        public static final int activity_recommend=0x7f030005;
+        public static final int activity_setting=0x7f030006;
+        public static final int activity_suggest=0x7f030007;
+        public static final int item_drawer_list=0x7f030008;
+        public static final int item_image_listview=0x7f030009;
+        public static final int widget_load_more_footer=0x7f03000a;
+        public static final int widget_pull_to_refresh_header=0x7f03000b;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int image_detail_menu=0x7f090000;
+        public static final int main=0x7f090001;
     }
     public static final class string {
+        public static final int action_search=0x7f070003;
+        public static final int action_set_wallpaper=0x7f070012;
         public static final int action_settings=0x7f070002;
-        public static final int app_description=0x7f070007;
+        public static final int app_description=0x7f070008;
         public static final int app_name=0x7f070000;
-        public static final int drawer_close=0x7f070009;
-        public static final int drawer_open=0x7f070008;
-        public static final int drawer_titile1=0x7f07000a;
-        public static final int drawer_title2=0x7f07000b;
-        public static final int drawer_title3=0x7f07000c;
-        public static final int drawer_title4=0x7f07000d;
-        public static final int drawer_title5=0x7f07000e;
-        public static final int drawer_title6=0x7f07000f;
+        public static final int drawer_close=0x7f07000a;
+        public static final int drawer_open=0x7f070009;
+        public static final int drawer_titile1=0x7f07000b;
+        public static final int drawer_title2=0x7f07000c;
+        public static final int drawer_title3=0x7f07000d;
+        public static final int drawer_title4=0x7f07000e;
+        public static final int drawer_title5=0x7f07000f;
+        public static final int drawer_title6=0x7f070010;
         public static final int hello_world=0x7f070001;
-        public static final int pull_to_refresh_pull_label=0x7f070003;
-        public static final int pull_to_refresh_refreshing_label=0x7f070005;
-        public static final int pull_to_refresh_release_label=0x7f070004;
-        public static final int pull_to_refresh_tap_label=0x7f070006;
+        public static final int pull_to_refresh_pull_label=0x7f070004;
+        public static final int pull_to_refresh_refreshing_label=0x7f070006;
+        public static final int pull_to_refresh_release_label=0x7f070005;
+        public static final int pull_to_refresh_tap_label=0x7f070007;
+        public static final int share=0x7f070011;
     }
     public static final class style {
         /** 
@@ -132,5 +144,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int imageDetailTheme=0x7f080002;
     }
 }

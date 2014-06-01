@@ -128,7 +128,7 @@ public class CommonAdapter extends BaseAdapter{
 //		holder.moreUrl.getLayoutParams().height=45;
 		
 	    holder.title.setText(results.get(position).getTitleNoFormatting());
-	    holder.moreUrl.setText("图片来源："+results.get(position).getOriginalContextUrl());
+	    holder.moreUrl.setText("点击查看图片来源");
 		
 		ImageLoader.getInstance().displayImage(results.get(position).getUrl(), 
 				holder.image,

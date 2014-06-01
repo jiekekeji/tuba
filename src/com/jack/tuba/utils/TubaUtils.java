@@ -274,7 +274,7 @@ public class TubaUtils {
 	 * @param context
 	 * @param text
 	 */
-	public void MyToast(Context context,String text) {
+	public static void MyToast(Context context,String text) {
 		Toast.makeText(context, text, Toast.LENGTH_SHORT);
 	}
 }

@@ -109,7 +109,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 
 		// header
 		mRefreshView = (RelativeLayout) mInflater.inflate(
-				R.layout.pull_to_refresh_header, this, false);
+				R.layout.widget_pull_to_refresh_header, this, false);
 		mRefreshViewText = (TextView) mRefreshView
 				.findViewById(R.id.pull_to_refresh_text);
 		mRefreshViewImage = (ImageView) mRefreshView

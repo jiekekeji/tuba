@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme for API 11+. This theme completely replaces
@@ -8,6 +8,9 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
 
+     <style name="imageDetailTheme" parent="android:Theme.Holo">
+        <item name="android:divider">@android:color/transparent</item>
+    </style>
     
     
 </resources>

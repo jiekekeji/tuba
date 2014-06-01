@@ -56,7 +56,7 @@ public class PullAndLoadListView extends PullToRefreshListView {
 
 		// footer
 		mFooterView = (RelativeLayout) mInflater.inflate(
-				R.layout.load_more_footer, this, false);
+				R.layout.widget_load_more_footer, this, false);
 		/*
 		 * mLabLoadMore = (TextView) mFooterView
 		 * .findViewById(R.id.load_more_lab_view);

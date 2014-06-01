@@ -68,8 +68,8 @@ public class DrawerListAdapter extends BaseAdapter{
 		if (convertView == null) {
 			view = inflater.inflate(R.layout.item_drawer_list,null);;
 			holder = new ViewHolder();
-			holder.text = (TextView) view.findViewById(R.id.drawer_title);
-			holder.image = (ImageView) view.findViewById(R.id.drawer_icon);
+//			holder.text = (TextView) view.findViewById(R.id.drawer_title);
+//			holder.image = (ImageView) view.findViewById(R.id.drawer_icon);
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();

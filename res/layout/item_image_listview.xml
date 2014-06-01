@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/lv_image_selector"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="com.jack.imageba.MainActivity" >
@@ -11,6 +12,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center_vertical" 
+        android:background="@drawable/text_selector"
+        android:textSize="18sp"
+        android:textColor="@color/black"
         android:text="TextView" />
 
     <ImageView
@@ -23,12 +27,16 @@
 
     <com.jack.tuba.widget.ListTextView
         android:id="@+id/more_image"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/iv_item_image_list_big"
-        
-        android:text="TextView" />
+        android:layout_alignParentRight="true"
+        android:gravity="right|center_vertical"
+        android:background="@drawable/text_selector"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="点击查看图片来源" />
 
 </RelativeLayout>

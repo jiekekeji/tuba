@@ -7,4 +7,6 @@
 	<color name="ldrawer_color">#FFFFFF</color>
     <color name="actionbar_color">#bf360c</color>
     <color name="drawer_arrow_second_color">#303f9f</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_white">#F0F0F0</color>
 </resources>

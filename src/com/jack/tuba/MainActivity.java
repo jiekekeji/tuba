@@ -6,14 +6,17 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
@@ -21,6 +24,7 @@ import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.jack.tuba.adapter.CommonAdapter;
 import com.jack.tuba.app.TuBaApp;
 import com.jack.tuba.domain.Result;
+import com.jack.tuba.utils.Constant;
 import com.jack.tuba.utils.LoadDataTask;
 import com.jack.tuba.utils.LoadDataTask.OnLoadDataListener;
 import com.jack.tuba.utils.TubaUtils;
@@ -54,44 +58,98 @@ public class MainActivity extends Activity implements OnRefreshListener, OnLoadM
 		setContentView(R.layout.activity_main);
 		initOptions();
 		initActionBar();
-//		initDrawerMenu();
+		initDrawerMenu();
 		initView();
 	}
 	
-//	private void initDrawerMenu() {
-//		// TODO Auto-generated method stub
-//		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        mDrawerList = (ListView) findViewById(R.id.navdrawer);
-//
-//
-//        drawerArrow = new DrawerArrowDrawable(this) {
-//            @Override
-//            public boolean isLayoutRtl() {
-//                return false;
-//            }
-//        };
-//        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-//            drawerArrow, R.string.drawer_open,
-//            R.string.drawer_close) {
-//
-//            public void onDrawerClosed(View view) {
-//                super.onDrawerClosed(view);
-//                invalidateOptionsMenu();
-//            }
-//
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                invalidateOptionsMenu();
-//            }
-//        };
-//        mDrawerLayout.setDrawerListener(mDrawerToggle);
-//        mDrawerToggle.syncState();
-//          
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//            android.R.layout.simple_list_item_1, android.R.id.text1, Constant.menuItem);
-//        mDrawerList.setAdapter(adapter);
-//        mDrawerList.setOnItemClickListener(this);
-//	}
+	/**
+	 * 侧滑菜单
+	 */
+	private void initDrawerMenu() {
+		// TODO Auto-generated method stub
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.navdrawer);
+
+
+        drawerArrow = new DrawerArrowDrawable(this) {
+            @Override
+            public boolean isLayoutRtl() {
+                return false;
+            }
+        };
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+            drawerArrow, R.string.drawer_open,
+            R.string.drawer_close) {
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+          
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+            R.layout.item_drawer_list, R.id.drawerlist_item, Constant.menuItem);
+        
+        mDrawerList.setAdapter(adapter);
+        DrawerOnItemClickListener mListener=new DrawerOnItemClickListener();
+        mDrawerList.setOnItemClickListener(mListener);
+	}
+	/**
+	 * mDrawerList监听者
+	 * @author Administrator
+	 *
+	 */
+	class DrawerOnItemClickListener implements AdapterView.OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			Intent intent;
+			switch (position) {
+			case 0://我的下载
+				intent=new Intent(MainActivity.this, MyDownLoadActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+            case 1://应用推荐
+            	intent=new Intent(MainActivity.this, RecommendAppActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+			case 2://关于我们
+				intent=new Intent(MainActivity.this, AboutUsActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+            case 3://意见反馈
+            	intent=new Intent(MainActivity.this, SuggestActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+			case 4://设置中心
+				intent=new Intent(MainActivity.this, SettingActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+            case 5://查找更多
+            	intent=new Intent(MainActivity.this, HelpActivity.class);
+				startActivity(intent);
+				mDrawerLayout.closeDrawer(mDrawerList);
+				break;
+			default:
+				break;
+			}
+		}
+		
+	}
 
 	@SuppressLint("NewApi")
 	private void initActionBar() {
@@ -101,6 +159,9 @@ public class MainActivity extends Activity implements OnRefreshListener, OnLoadM
 		ab.setHomeButtonEnabled(true);
 	}
 
+	/**
+	 * listView 初始化
+	 */
 	private void initView() {
 		// TODO Auto-generated method stub
 		
@@ -215,76 +276,35 @@ public class MainActivity extends Activity implements OnRefreshListener, OnLoadM
 		// TODO Auto-generated method stub
 		Intent intent=new Intent(this,ImageDetailActivity.class);
 		intent.putExtra("url", mListItems.get(position-1).getUrl());
+		intent.putExtra("ivHeight", mListItems.get(position-1).getHeight());
+		intent.putExtra("ivWidth", mListItems.get(position-1).getWidth());
 		startActivity(intent);
 		
 	}
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-//                mDrawerLayout.closeDrawer(mDrawerList);
-//            } else {
-//                mDrawerLayout.openDrawer(mDrawerList);
-//            }
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//        mDrawerToggle.syncState();
-//    }
-//
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        mDrawerToggle.onConfigurationChanged(newConfig);
-//    }
-//
-//	@Override
-//	public void onItemClick(AdapterView<?> parent, View view, int position,
-//			long id) {
-//		// TODO Auto-generated method stub
-//		 switch (position) {
-//         case 0:
-//             mDrawerToggle.setAnimateEnabled(false);
-//             drawerArrow.setProgress(1f);
-//             break;
-//         case 1:
-//             mDrawerToggle.setAnimateEnabled(false);
-//             drawerArrow.setProgress(0f);
-//             break;
-//         case 2:
-//             mDrawerToggle.setAnimateEnabled(true);
-//             mDrawerToggle.syncState();
-//             break;
-//         case 4:
-//             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/IkiMuhendis/LDrawer"));
-//             startActivity(browserIntent);
-//             break;
-//         case 5:
-//             Intent share = new Intent(Intent.ACTION_SEND);
-//             share.setType("text/plain");
-//             share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//             share.putExtra(Intent.EXTRA_SUBJECT,
-//                 getString(R.string.app_name));
-//             share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_description) + "\n" +
-//                 "GitHub Page :  https://github.com/IkiMuhendis/LDrawer\n" +
-//                 "Sample App : https://play.google.com/store/apps/details?id=" +
-//                 getPackageName());
-//             startActivity(Intent.createChooser(share,
-//                 getString(R.string.app_name)));
-//             break;
-//         case 6:
-//             String appUrl = "https://play.google.com/store/apps/details?id=" + getPackageName();
-//             Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl));
-//             startActivity(rateIntent);
-//             break;
-//     }
-//	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+                mDrawerLayout.closeDrawer(mDrawerList);
+            } else {
+                mDrawerLayout.openDrawer(mDrawerList);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
 }

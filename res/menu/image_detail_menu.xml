@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:id="@+id/action_share"
+          android:title="@string/share"
+          android:showAsAction="always"
+          android:actionProviderClass="android.widget.ShareActionProvider"
+          />
+    <item
+        android:id="@+id/action_setphoto"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_set_wallpaper"/>
+    <item
+        android:id="@+id/action_download"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@android:drawable/stat_sys_download"
+        android:title="@string/action_settings"/>
+
+</menu>
