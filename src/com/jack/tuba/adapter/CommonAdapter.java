@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.jack.tuba.ImageOrigin;
 import com.jack.tuba.R;
 import com.jack.tuba.domain.Result;
 import com.jack.tuba.widget.ListTextView;
@@ -32,6 +34,7 @@ public class CommonAdapter extends BaseAdapter{
 	private int displayHeight;
 	private int displayWidth;
 	private String TAG="CommonAdapter";
+	private Context context;
 	/**
 	 * 
 	 * @param context
@@ -45,7 +48,7 @@ public class CommonAdapter extends BaseAdapter{
 			DisplayImageOptions options,
 			int displayHeight,
 			int displayWidth){
-		
+		this.context=context;
 		this.results=results;
         this.options=options;
         this.displayHeight=displayHeight;
@@ -104,6 +107,9 @@ public class CommonAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				Intent intent=new Intent(context,ImageOrigin.class );
+				intent.putExtra("origin_url",results.get(position).getOriginalContextUrl());
+				context.startActivity(intent);
 				Log.i(TAG, "OriginalContextUrl"+results.get(position).getOriginalContextUrl());
 			}
 		});

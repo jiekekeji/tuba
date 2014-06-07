@@ -7,7 +7,7 @@
           android:actionProviderClass="android.widget.ShareActionProvider"
           />
     <item
-        android:id="@+id/action_setphoto"
+        android:id="@+id/set_wallpaper"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_set_wallpaper"/>

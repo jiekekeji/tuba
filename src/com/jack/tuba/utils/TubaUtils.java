@@ -26,6 +26,8 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 public class TubaUtils {
 	
 	/**
@@ -87,19 +89,19 @@ public class TubaUtils {
 	}
 	
 	/**
-	 * 如果有SD卡 得到SD卡的缓存路径
-	 * 否则得到手机的缓存路径
+	 * 如果有SD卡 得到SD卡的路径
+	 * 否则得到手机的路径
 	 * @param context
 	 * @return
 	 */
-	public static String getImageCachePath(Context context) {
-		String imageCachePath;
+	public static String getRootDowndLoadPath(Context context) {
+		String tubaDowndLoadPath;
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-			imageCachePath = Environment.getDataDirectory().getPath();
+			tubaDowndLoadPath = Environment.getExternalStorageDirectory().getPath();
 		} else {
-			imageCachePath = context.getCacheDir().getPath();
+			tubaDowndLoadPath = context.getCacheDir().getPath();
 		}
-		return imageCachePath;
+		return tubaDowndLoadPath;
 	}
 	
 	/**
@@ -208,6 +210,26 @@ public class TubaUtils {
 		return true;
 	}
 
+	/**
+	 * 得到缓存图片的路径
+	 * @param url
+	 * @return 缓存图片的路径
+	 */
+	public static String  getImageCachePath(String url) {
+		// TODO Auto-generated method stub
+		String key=TubaUtils.keyOfMD5(url);
+		File cacheFile=ImageLoader.getInstance().getDiskCache().getDirectory();
+		String cachePath=cacheFile.getAbsolutePath();
+		
+		return cachePath+File.separator+key;
+		
+	}
+	
+	/**
+	 * 判断是否是wifi
+	 * @param context
+	 * @return
+	 */
 	public static boolean isWifi(Context context)
 	{
 		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE); 
@@ -275,6 +297,33 @@ public class TubaUtils {
 	 * @param text
 	 */
 	public static void MyToast(Context context,String text) {
-		Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+	}
+	
+	/**
+	 * 得到图片的下载路径
+	 * @return
+	 */
+	public static  String  getTubaDownloadPath(Context context,String downLoadFile) {
+		// TODO Auto-generated method stub
+		String sdPath=getRootDowndLoadPath(context);
+		File tuBaDownLoadFile=new File(sdPath+File.separator+downLoadFile);
+		if (!tuBaDownLoadFile.exists()) {
+			tuBaDownLoadFile.mkdirs();			
+		}
+		return tuBaDownLoadFile.getAbsolutePath();
+	}
+	
+	/**
+	 * 截取url得到图片名字
+	 * @param imageUrl
+	 * @return
+	 */
+	public static String getImageName(String imageUrl){
+		
+		return imageUrl.substring(imageUrl.lastIndexOf("/"));
+	}
+	
+	public static void copyImage(String path,String targetPath,Context context){
 	}
 }
