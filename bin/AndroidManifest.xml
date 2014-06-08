@@ -68,6 +68,11 @@
             android:theme="@android:style/Theme.Holo"
             >
         </activity>
+        <activity
+            android:name=".MySingleDownLoadAtivity"
+            android:theme="@android:style/Theme.Holo"
+            >
+        </activity>
         
         
         

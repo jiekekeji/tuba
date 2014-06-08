@@ -43,42 +43,48 @@ public final class R {
     }
     public static final class drawable {
         public static final int empty_photo=0x7f020000;
-        public static final int ic_drawer=0x7f020001;
-        public static final int ic_empty=0x7f020002;
-        public static final int ic_error=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int ic_pulltorefresh_arrow=0x7f020005;
-        public static final int image_detail_selector=0x7f020006;
-        public static final int ldrawer_selector=0x7f020007;
-        public static final int lv=0x7f020008;
-        public static final int lv_image_selector=0x7f020009;
-        public static final int nomal=0x7f02000a;
-        public static final int pressed=0x7f02000b;
-        public static final int progress_bar_states=0x7f02000c;
-        public static final int text_selector=0x7f02000d;
+        public static final int ic_delete=0x7f020001;
+        public static final int ic_drawer=0x7f020002;
+        public static final int ic_empty=0x7f020003;
+        public static final int ic_error=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_pulltorefresh_arrow=0x7f020006;
+        public static final int image_detail_selector=0x7f020007;
+        public static final int ldrawer_selector=0x7f020008;
+        public static final int lv=0x7f020009;
+        public static final int lv_image_selector=0x7f02000a;
+        public static final int nomal=0x7f02000b;
+        public static final int pressed=0x7f02000c;
+        public static final int progress_bar_states=0x7f02000d;
+        public static final int text_selector=0x7f02000e;
     }
     public static final class id {
-        public static final int action_download=0x7f0a0014;
-        public static final int action_search=0x7f0a0015;
-        public static final int action_share=0x7f0a0012;
+        public static final int action_download=0x7f0a0019;
+        public static final int action_search=0x7f0a001a;
+        public static final int action_share=0x7f0a0017;
+        public static final int download_iv_photo=0x7f0a0007;
         public static final int drawer_layout=0x7f0a0003;
-        public static final int drawerlist_item=0x7f0a0006;
-        public static final int image_title=0x7f0a0007;
-        public static final int iv_item_image_list_big=0x7f0a0008;
+        public static final int drawerlist_item=0x7f0a0008;
+        public static final int image_title=0x7f0a0009;
+        public static final int iv_icon=0x7f0a000c;
+        public static final int iv_item_image_list_big=0x7f0a000a;
         public static final int iv_photo=0x7f0a0002;
         public static final int list=0x7f0a0004;
-        public static final int load_more_footer=0x7f0a000a;
-        public static final int load_more_progressBar=0x7f0a000c;
-        public static final int more_image=0x7f0a0009;
+        public static final int load_more_footer=0x7f0a000f;
+        public static final int load_more_progressBar=0x7f0a0011;
+        public static final int more_image=0x7f0a000b;
         public static final int navdrawer=0x7f0a0005;
         public static final int pb=0x7f0a0000;
-        public static final int pull_to_refresh_header=0x7f0a000d;
-        public static final int pull_to_refresh_image=0x7f0a000f;
-        public static final int pull_to_refresh_progress=0x7f0a000e;
-        public static final int pull_to_refresh_text=0x7f0a0010;
-        public static final int pull_to_refresh_updated_at=0x7f0a0011;
-        public static final int set_wallpaper=0x7f0a0013;
-        public static final int top_line=0x7f0a000b;
+        public static final int pull_to_refresh_header=0x7f0a0012;
+        public static final int pull_to_refresh_image=0x7f0a0014;
+        public static final int pull_to_refresh_progress=0x7f0a0013;
+        public static final int pull_to_refresh_text=0x7f0a0015;
+        public static final int pull_to_refresh_updated_at=0x7f0a0016;
+        public static final int set_wallpaper=0x7f0a0018;
+        public static final int swipemenulistview_=0x7f0a0006;
+        public static final int top_line=0x7f0a0010;
+        public static final int tv_icom_name=0x7f0a000d;
+        public static final int tv_icon_length=0x7f0a000e;
         public static final int webview=0x7f0a0001;
     }
     public static final class layout {
@@ -88,13 +94,15 @@ public final class R {
         public static final int activity_imagedetail=0x7f030003;
         public static final int activity_main=0x7f030004;
         public static final int activity_mydownload=0x7f030005;
-        public static final int activity_recommend=0x7f030006;
-        public static final int activity_setting=0x7f030007;
-        public static final int activity_suggest=0x7f030008;
-        public static final int item_drawer_list=0x7f030009;
-        public static final int item_image_listview=0x7f03000a;
-        public static final int widget_load_more_footer=0x7f03000b;
-        public static final int widget_pull_to_refresh_header=0x7f03000c;
+        public static final int activity_mysingledownload=0x7f030006;
+        public static final int activity_recommend=0x7f030007;
+        public static final int activity_setting=0x7f030008;
+        public static final int activity_suggest=0x7f030009;
+        public static final int item_drawer_list=0x7f03000a;
+        public static final int item_image_listview=0x7f03000b;
+        public static final int item_mydownload=0x7f03000c;
+        public static final int widget_load_more_footer=0x7f03000d;
+        public static final int widget_pull_to_refresh_header=0x7f03000e;
     }
     public static final class menu {
         public static final int image_detail_menu=0x7f090000;
