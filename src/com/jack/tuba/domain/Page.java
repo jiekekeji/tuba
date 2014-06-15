@@ -12,6 +12,10 @@ public class Page implements Serializable{
 	private int start;
 	private int label;
 	
+	public Page() {
+		// TODO Auto-generated constructor stub
+	}
+	
     public int getStart() {
 		return start;
 	}

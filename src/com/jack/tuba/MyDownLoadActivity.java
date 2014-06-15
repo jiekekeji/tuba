@@ -21,14 +21,30 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.jack.tuba.adapter.MyDownLoadAdpter;
 import com.jack.tuba.utils.TubaUtils;
-
+/***
+ * 展示已下载的图
+ * @author Administrator
+ *
+ */
 public class MyDownLoadActivity extends Activity implements
 		OnMenuItemClickListener {
-
-	private static final String downLoadFile = "tubaDownLoad";
-	private static final String TAG = "MyDownLoadActivity";
+	
+	private final String TAG = MyDownLoadActivity.class.getName();
+    /**
+     * 下载文件夹
+     */
+	private final String downLoadFile = "tubaDownLoad";
+	/**
+	 * 一个item可以左滑动的listView
+	 */
 	private SwipeMenuListView mListView;
+	/**
+	 * adapter
+	 */
 	private MyDownLoadAdpter mAdapter;
+	/**
+	 * 图片列表
+	 */
 	private List<File> imageList;
 
 	@Override

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
 
-    <com.jack.tuba.widget.PullAndLoadListView
+    <com.jack.tuba.widget.PullUpAndDownListView
         android:id="@+id/list"
         android:divider="@android:color/transparent"
         android:dividerHeight="10dp"

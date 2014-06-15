@@ -16,7 +16,9 @@ public class Image implements Serializable{
 	
 	private int responseStatus;
 
-
+    public Image() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getResponseDetails() {
 		return responseDetails;

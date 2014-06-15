@@ -25,6 +25,10 @@ public class Result implements Serializable{
     private String contentNoFormatting;
     private String tbUrl;
     
+    public Result() {
+		// TODO Auto-generated constructor stub
+	}
+    
 	public String getGsearchResultClass() {
 		return gsearchResultClass;
 	}

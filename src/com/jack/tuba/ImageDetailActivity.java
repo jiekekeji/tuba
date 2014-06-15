@@ -26,16 +26,32 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class ImageDetailActivity extends Activity {
 
-	private static final String TAG = "ImageDetailActivity";
-	private ShareActionProvider mShareActionProvider;
+	private static final String TAG = ImageDetailActivity.class.getName();
+	/**
+	 * universalimageloader展示的参数
+	 */
 	private DisplayImageOptions options;
+	/**
+	 * 用于展示image,可以缩放
+	 */
 	private PhotoView photoView;
+	/**
+	 * 图片的地址
+	 */
 	private String url;
+	/**
+	 * 图片下载到sd卡的文件名
+	 */
 	private static final String downLoadFile = "tubaDownLoad";
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -47,6 +63,9 @@ public class ImageDetailActivity extends Activity {
 		initPhotoView();
 	}
 
+	/**
+	 * 配置actionBar,
+	 */
 	private void initActionBar() {
 		// TODO Auto-generated method stub
 		ActionBar mActionBar = getActionBar();
@@ -71,7 +90,7 @@ public class ImageDetailActivity extends Activity {
 	}
 
 	/**
-	 * 
+	 * 展示图片
 	 */
 	private void initPhotoView() {
 		photoView = (PhotoView) findViewById(R.id.iv_photo);
@@ -84,6 +103,7 @@ public class ImageDetailActivity extends Activity {
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.image_detail_menu, menu);
 		MenuItem shareItem = menu.findItem(R.id.action_share);
@@ -149,13 +169,13 @@ public class ImageDetailActivity extends Activity {
 	 * @author Administrator
 	 *
 	 */
-	class LoadImageTask extends AsyncTask<String, integer, Void>{
+	class LoadImageTask extends AsyncTask<String, integer, String>{
 
 		@Override
-		protected Void doInBackground(String... params) {
+		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			copyImages();
-			return null;
+			
+			return copyImages();
 		}
 
 		@Override
@@ -165,9 +185,9 @@ public class ImageDetailActivity extends Activity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
-			TubaUtils.MyToast(ImageDetailActivity.this, "下载完成");
+			TubaUtils.MyToast(ImageDetailActivity.this, result);
 			super.onPostExecute(result);
 		}
 
@@ -181,16 +201,21 @@ public class ImageDetailActivity extends Activity {
 	}
 
 	/**
-	 * 复制缓存的图片到下载目录
+	 * 从缓存目录复制到下载目录
+	 * @return  String 下载的状态
 	 */
-	private void copyImages() {
-		// TODO Auto-generated method stub
-
+	private String copyImages() {
+		
 		FileOutputStream fos = null;
 		FileInputStream fis = null;
+		
 		try {
-			String imageCachePath = TubaUtils.getImageCachePath(url);
-			fis = new FileInputStream(imageCachePath);
+			
+			File imageCache=getImageCachePath(url);
+			if (imageCache==null) {
+				return "无法下载，稍后图片打开后再试";
+			}
+			fis = new FileInputStream(imageCache);
 
 			String targetPath = TubaUtils.getTubaDownloadPath(this,
 					downLoadFile) + TubaUtils.getImageName(url);
@@ -206,8 +231,12 @@ public class ImageDetailActivity extends Activity {
 			while ((len = fis.read(buf)) != -1) {
 				fos.write(buf, 0, len);
 			}
+			
+			return "下载成功";
 		} catch (IOException e) {
-			Log.i(TAG, "复制文件失败");
+			
+			return "无法下载，稍后图片打开后再试";
+			
 		} finally {
 			try {
 				if (fis != null)
@@ -224,6 +253,18 @@ public class ImageDetailActivity extends Activity {
 		}
 	}
 	
-	
-	
+	/**
+	 * 得到缓存图片的路径
+	 * @param url
+	 * @return 缓存图片的路径
+	 */
+	public File  getImageCachePath(String url) {
+		
+		File f=ImageLoader.getInstance().getDiskCache().get(url);
+		if (f!=null&&f.exists()) {
+			return f;	
+		}else {
+			return null;
+		}	
+	}
 }

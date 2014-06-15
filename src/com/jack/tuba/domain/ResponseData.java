@@ -23,6 +23,10 @@ public class ResponseData implements Serializable{
 //	public void setCursor(Cursor cursor) {
 //		this.cursor = cursor;
 //	}
+	
+	public ResponseData() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public LinkedList<Result> getResults() {
 		return results;

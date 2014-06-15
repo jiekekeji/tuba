@@ -214,20 +214,7 @@ public class TubaUtils {
 		return true;
 	}
 
-	/**
-	 * 得到缓存图片的路径
-	 * @param url
-	 * @return 缓存图片的路径
-	 */
-	public static String  getImageCachePath(String url) {
-		// TODO Auto-generated method stub
-		String key=TubaUtils.keyOfMD5(url);
-		File cacheFile=ImageLoader.getInstance().getDiskCache().getDirectory();
-		String cachePath=cacheFile.getAbsolutePath();
-		
-		return cachePath+File.separator+key;
-		
-	}
+
 	
 	/**
 	 * 判断是否是wifi
@@ -276,24 +263,7 @@ public class TubaUtils {
 		return sb.toString();
 	}
 	
-	/**
-	 * 将输入流转为字符串
-	 * 
-	 * @param is
-	 * @return
-	 * @throws IOException
-	 */
-	public static String Stream2String(InputStream is) throws IOException {
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is),
-				16 * 1024);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) { // 处理换行符
-			sb.append(line + "\n");
-		}
-		return sb.toString();
-	}
 	
 	/**
 	 * Toast

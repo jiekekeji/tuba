@@ -18,6 +18,10 @@ public class Cursor implements Serializable{
     private String moreResultsUrl;
     private float searchResultTime;
     
+    public Cursor() {
+		// TODO Auto-generated constructor stub
+	}
+    
     
 	public String getResultCount() {
 		return resultCount;

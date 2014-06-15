@@ -13,10 +13,15 @@ import android.widget.TextView;
 
 import com.jack.tuba.R;
 import com.jack.tuba.utils.TubaUtils;
-
+/**
+ * 下载列表的适配器
+ * @author Administrator
+ *
+ */
 public class MyDownLoadAdpter extends BaseAdapter {
 
 	private List<File> files;
+	
 	private Context context;
 	
 	public MyDownLoadAdpter(List<File> files,Context context) {
