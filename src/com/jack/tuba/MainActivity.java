@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
@@ -84,6 +85,11 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 * 记录listVieew的状态：正在加载或者加载完成
 	 */
 	private boolean isOnLoading=false;
+	/**
+	 * 是否是第一次加载数据
+	 */
+	private boolean isFirstLoading=true;
+	private ProgressBar mProgressBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -208,7 +214,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		mListView.setAdapter(mImageAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setRefreshListener(new MyRefreshListener());
+		
+		mProgressBar = (ProgressBar) findViewById(R.id.main_pro_bar);
 
+		isFirstLoading=true;
 		refreshData(getUrl(q, rsz, start));
 
 	}
@@ -252,7 +261,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			return;
 		}
 		start=start+rsz;
-		String nextUrl=getUrl(q, rsz, start);		
+		String nextUrl=getUrl(q, rsz, start);
+		isOnLoading=true;
 		refreshData(nextUrl);
 		Log.i(TAG, nextUrl);
 	}
@@ -267,6 +277,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			start=start-rsz;
 		}
 		String upUrl=getUrl(q, rsz, start);
+		isOnLoading=true;
 		refreshData(upUrl);
 		Log.i(TAG, upUrl);
 	}
@@ -291,7 +302,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 */
 	public void refreshData(String url) {
 
-		isOnLoading=true;
 		String key = TubaUtils.keyOfMD5(url);
 		/**
 		 * 从sd卡中拿，如果没有则判断网络是否ok,然后从网络拿
@@ -305,6 +315,11 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				mListItems.addAll(results);
 			} else {
 				mListItems.addAll(results);
+			}
+			
+			if (isFirstLoading) {
+				mProgressBar.setVisibility(View.GONE);
+				isFirstLoading=false;
 			}
 			mImageAdapter.notifyDataSetChanged();
 			mListView.setSelection(1);
@@ -389,6 +404,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		@Override
 		public void onPreLoadData() {
 			// TODO Auto-generated method stub
+			if (isFirstLoading) {
+				mProgressBar.setVisibility(View.VISIBLE);
+			}
 
 		}
 
@@ -401,6 +419,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		@Override
 		public void onLoadDataComplete(LinkedList<Result> results) {
 			// TODO Auto-generated method stub
+			if (isFirstLoading) {
+				mProgressBar.setVisibility(View.GONE);
+				isFirstLoading=false;
+			}
 			if (results != null && results.size() > 0) {
 				if (mListItems.size()>0) {
 					mListItems.clear();

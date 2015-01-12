@@ -1,29 +1,39 @@
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <com.jack.tuba.widget.PullUpAndDownListView
-        android:id="@+id/list"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10dp"
-        android:background="@drawable/lv_image_selector"       
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        <com.jack.tuba.widget.PullUpAndDownListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/lv_image_selector"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp" />
 
-    <!-- The navigation drawer -->
-    <ListView
-        android:id="@+id/navdrawer"
-        android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/gray_1"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"
-        android:drawSelectorOnTop="false">
-    </ListView>
+        <!-- The navigation drawer -->
 
-</android.support.v4.widget.DrawerLayout>
+        <ListView
+            android:id="@+id/navdrawer"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/gray_1"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp"
+            android:drawSelectorOnTop="false" >
+        </ListView>
+    </android.support.v4.widget.DrawerLayout>
+
+    <ProgressBar
+        android:id="@+id/main_pro_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
