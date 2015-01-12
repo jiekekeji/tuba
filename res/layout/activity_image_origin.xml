@@ -13,12 +13,30 @@
         android:layout_alignParentTop="true"
         android:progressDrawable="@drawable/progress_bar_states" >  
     </ProgressBar>  
-  
-    <WebView  
-        android:id="@+id/webview"  
+    <RelativeLayout 
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"
         android:layout_below="@id/pb"
+        >
+        <FrameLayout 
+            android:layout_width="match_parent"  
+            android:layout_height="match_parent"
+            >
+            <ProgressBar 
+                
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </FrameLayout>
+        <WebView  
+        android:id="@+id/webview"          
         android:layout_width="match_parent"  
         android:layout_height="match_parent" />
+        
+    </RelativeLayout>
+  
+    
     
     
 </RelativeLayout>

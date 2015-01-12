@@ -10,9 +10,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.tv.TvContract.Programs;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -46,6 +50,10 @@ public class MyDownLoadActivity extends Activity implements
 	 * 图片列表
 	 */
 	private List<File> imageList;
+	/**
+	 * 加载等待条
+	 */
+	private FrameLayout progessLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +61,21 @@ public class MyDownLoadActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mydownload);
 
-		File[] imaFiles = getImageFiles();
-		imageList = new ArrayList<>(Arrays.asList(imaFiles));
+		initView();
+		new LoadImageFileTask().execute();
 
-		if (null == imaFiles || imaFiles.length == 0) {
-			TubaUtils.MyToast(this, "没有下载的");
-			return;
-		} else {
-			initSwipeMenuListView();
-		}
-
+	}
+    
+	private void initView() {
+		// TODO Auto-generated method stub
+		mListView = (SwipeMenuListView) findViewById(R.id.swipemenulistview_);
+		progessLayout = (FrameLayout) findViewById(R.id.frame_progress_bar);
 	}
 
 	/**
 	 * 对SwipeMenuListView的初始化
 	 */
-	private void initSwipeMenuListView() {
-		mListView = (SwipeMenuListView) findViewById(R.id.swipemenulistview_);
+	private void initSwipeMenuListView() {		
 		mAdapter = new MyDownLoadAdpter(imageList, this);
 		mListView.setAdapter(mAdapter);
 
@@ -181,6 +187,46 @@ public class MyDownLoadActivity extends Activity implements
 		Intent intent=new Intent(this, MySingleDownLoadAtivity.class);
 		intent.putExtra("path",path);
 		startActivity(intent);
+	}
+	/**
+	 * 加载本地的图
+	 * @author Administrator
+	 *
+	 */
+	class LoadImageFileTask extends AsyncTask<Void, Void, File[]>{
+
+		@Override
+		protected File[] doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			File[] imaFiles = getImageFiles();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return imaFiles;
+		}
+		
+		@Override
+		protected void onPostExecute(File[] files) {
+			// TODO Auto-generated method stub		
+			if (null == files || files.length == 0) {
+				TubaUtils.MyToast(MyDownLoadActivity.this, "没有下载的");
+				return;
+			} else {
+				imageList = new ArrayList<>(Arrays.asList(files));
+				initSwipeMenuListView();
+			}
+			progessLayout.setVisibility(View.GONE);
+			super.onPostExecute(files);
+		}
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			progessLayout.setVisibility(View.VISIBLE);
+			super.onPreExecute();
+		}
 	}
 
 }

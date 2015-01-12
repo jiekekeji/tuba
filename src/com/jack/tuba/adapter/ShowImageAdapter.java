@@ -25,7 +25,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-public class CommonAdapter extends BaseAdapter{
+public class ShowImageAdapter extends BaseAdapter{
 	
 	private LayoutInflater inflater;
 	private LinkedList<Result> results;
@@ -43,7 +43,7 @@ public class CommonAdapter extends BaseAdapter{
 	 * @param displayHeight
 	 * @param displayWidth
 	 */
-	public CommonAdapter(Context context,
+	public ShowImageAdapter(Context context,
 			LinkedList<Result> results,
 			DisplayImageOptions options,
 			int displayHeight,

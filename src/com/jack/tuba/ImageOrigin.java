@@ -3,20 +3,30 @@ package com.jack.tuba;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-
+/**
+ * 图片来源地址
+ * 用webView展示
+ * @author Administrator
+ *
+ */
 public class ImageOrigin extends Activity{
-	
+	/**
+	 * webView进度条
+	 */
 	private ProgressBar pb;
+	
 	private WebView mWebView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_image_origin);
 		initWebView();
 		initProgressBar();

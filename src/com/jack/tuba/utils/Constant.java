@@ -11,5 +11,11 @@ public class Constant {
 	 * url请求主地址
 	 */
 	public static final String  homeUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0";
+	/**
+	 * 推荐搜索
+	 */
+	public static final String[] suggestSearch={"xxxxx","xxxxxx","xxxxx","xxxxxx","xxxxxx","xxxxx","xxxxxx"
+		,"xxxxxx","xxxxx","xxxxxx"
+		,"xxxxxx","xxxxx","xxxxxx","xxxxxx","xxxxx","xxxxxx"};
 
 }

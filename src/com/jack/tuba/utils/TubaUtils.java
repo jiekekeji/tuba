@@ -1,11 +1,8 @@
 package com.jack.tuba.utils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -30,8 +27,6 @@ import android.os.Environment;
 import android.util.TypedValue;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 public class TubaUtils {
 	
 	/**
@@ -65,31 +60,6 @@ public class TubaUtils {
 			file.mkdirs();
 		}		
 		return file;
-	}
-	
-	/**
-	 * 
-	 * @param keyword  关键词
-	 * @param size     每页大小
-	 * @param start    起始页
-	 * @return
-	 * @throws UnsupportedEncodingException 
-	 */
-	public static String getEncoderUrl(String keyword,int size,int start){
-		
-		String q=null;
-		try {
-			q = URLEncoder.encode(keyword, "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String rsz=String.valueOf(size);
-		String str=String.valueOf(start);
-		
-		String url="https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="+q+"&rsz="+rsz+"&start="+str+"";
-		return url;
-		
 	}
 	
 	/**

@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
-import com.jack.tuba.adapter.CommonAdapter;
+import com.jack.tuba.adapter.ShowImageAdapter;
 import com.jack.tuba.app.TuBaApp;
 import com.jack.tuba.domain.Result;
 import com.jack.tuba.utils.Constant;
@@ -38,22 +38,51 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class MainActivity extends Activity implements OnItemClickListener {
 
 	private static final String TAG = "MainActivity";
+	/**
+	 * item的信息
+	 */
 	private LinkedList<Result> mListItems;
-	private DisplayImageOptions options;
-	private PullUpAndDownListView mListView;
-
-	private CommonAdapter mCommonAdapter;
-
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
-	private ActionBarDrawerToggle mDrawerToggle;
-	private DrawerArrowDrawable drawerArrow;
-	private boolean drawerArrowColor;
-	// "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=girl&rsz=8&start=10";
-	private String q = "美女";
-	private int rsz = 8;
-	private int start = 0;
 	
+	private DisplayImageOptions options;
+	/**
+	 * 上拉加载下一页，下拉加载上一页ListView
+	 */
+	private PullUpAndDownListView mListView;
+    /**
+     * 展示image的adapter
+     */
+	private ShowImageAdapter mImageAdapter;
+    /**
+     * 左侧菜单
+     */
+	private DrawerLayout mDrawerLayout;
+	/**
+	 * 左侧菜单列表
+	 */
+	private ListView mDrawerList;
+	/**
+	 * 左侧菜单开关
+	 */
+	private ActionBarDrawerToggle mDrawerToggle;
+	
+	private DrawerArrowDrawable drawerArrow;
+	
+	private boolean drawerArrowColor;
+	/**
+	 * 搜索关键字
+	 */
+	private String q = "美女";
+	/**
+	 * 搜索每页的数量
+	 */
+	private int rsz = 8;
+	/**
+	 * 搜索的起始位置
+	 */
+	private int start = 0;
+	/**
+	 * 记录listVieew的状态：正在加载或者加载完成
+	 */
 	private boolean isOnLoading=false;
 	
 	@Override
@@ -119,9 +148,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			// TODO Auto-generated method stub
 			Intent intent;
 			switch (position) {
-			case 0:// 我的下载
+			case 0:// 我的下载			
 				intent = new Intent(MainActivity.this, MyDownLoadActivity.class);
-				startActivity(intent);
+				startActivity(intent);		
 				mDrawerLayout.closeDrawer(mDrawerList);
 				break;
 			case 1:// 应用推荐
@@ -172,11 +201,11 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		mListItems = new LinkedList<Result>();
 		int[] xy = TubaUtils.getScreenXy(this);
-		mCommonAdapter = new CommonAdapter(this, mListItems, options, xy[1],
+		mImageAdapter = new ShowImageAdapter(this, mListItems, options, xy[1],
 				xy[0]);
 
 		mListView = (PullUpAndDownListView) findViewById(R.id.list);
-		mListView.setAdapter(mCommonAdapter);
+		mListView.setAdapter(mImageAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setRefreshListener(new MyRefreshListener());
 
@@ -277,7 +306,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			} else {
 				mListItems.addAll(results);
 			}
-			mCommonAdapter.notifyDataSetChanged();
+			mImageAdapter.notifyDataSetChanged();
 			mListView.setSelection(1);
 			mListView.setRefreshComplete();
 			isOnLoading=false;
@@ -304,20 +333,38 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		intent.putExtra("url", mListItems.get(position - 1).getUrl());
 		intent.putExtra("ivHeight", mListItems.get(position - 1).getHeight());
 		intent.putExtra("ivWidth", mListItems.get(position - 1).getWidth());
+		overridePendingTransition(R.anim.hold,R.anim.hold);
 		startActivity(intent);
 
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.closeDrawer(mDrawerList);
-			} else {
-				mDrawerLayout.openDrawer(mDrawerList);
-			}
+		int id=item.getItemId();
+		switch (id) {
+		case android.R.id.home:
+			openOrCloseDrawerList();
+			break;
+		case R.id.action_search:
+			Intent i=new Intent(MainActivity.this,SearchImageActivity.class);
+			startActivityForResult(i, 0);
+			break;
+
+		default:
+			break;
 		}
+
 		return super.onOptionsItemSelected(item);
+	}
+    /**
+     * 左侧菜单开关
+     */
+	private void openOrCloseDrawerList() {
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+			mDrawerLayout.closeDrawer(mDrawerList);
+		} else {
+			mDrawerLayout.openDrawer(mDrawerList);
+		}
 	}
 
 	@Override
@@ -361,7 +408,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				}else {
 					mListItems.addAll(results);
 				}
-				mCommonAdapter.notifyDataSetChanged();
+				mImageAdapter.notifyDataSetChanged();
 			}else {
 				Toast.makeText(MainActivity.this, "没有更多了", Toast.LENGTH_SHORT).show();
 			}

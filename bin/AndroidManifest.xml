@@ -73,6 +73,12 @@
             android:theme="@android:style/Theme.Holo"
             >
         </activity>
+        <activity
+            android:name=".SearchImageActivity"
+            android:theme="@android:style/Theme.Holo"
+            >
+        </activity>
+        
         
         
         
