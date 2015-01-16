@@ -3,7 +3,6 @@
 
     <item android:drawable="@drawable/pressed" android:state_pressed="true"/>
     <!-- pressed 按下时-->
-
     <item android:drawable="@drawable/nomal"/>
     <!-- default 正常情况下-->
 

@@ -14,29 +14,38 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.jack.tuba.app.TuBaApp;
 import com.jack.tuba.domain.Image;
 import com.jack.tuba.domain.Result;
 
 /**
+ * 加载网络json
  * 
- * @author Administrator
- * 
+ * @author jack
  */
-public abstract class LoadDataTask extends
+public class LoadDataTask extends
 		AsyncTask<String, Integer, LinkedList<Result>> {
 
+	
 	private static final String TAG = LoadDataTask.class.getName();
 	/**
 	 * 用来将缓存jsonObject
 	 */
 	private DiskLruCache mDiskCache;
+	
+	private Context context;
+	/**
+	 * 对加载过程进行监听
+	 */
+	private LoadDataTaskListenner listenner;
 
-	public LoadDataTask(DiskLruCache diskLruCache) {
-
+	public LoadDataTask(DiskLruCache diskLruCache,Context context) {
+		this.context=context;
 		mDiskCache = diskLruCache;
 	}
 
@@ -46,15 +55,40 @@ public abstract class LoadDataTask extends
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
+		if (listenner!=null) {
+			listenner.onPreLoadData();
+		}
 		super.onPreExecute();
-		onPreLoadData();
-
 	}
 
 	@Override
 	protected LinkedList<Result> doInBackground(String... params) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		if (this.isCancelled()) {
+			return null;
+		}
+		Log.i(TAG, "doInBackground"+Thread.currentThread().getName());
 		String url = params[0];
+		LinkedList<Result> results = null;
+		results=getFromDiskLruCache(url);
+		if (results!=null&&results.size()>0) {
+			return results;
+		}else{
+			if (TubaUtils.isNetworkAvailable(context)) {
+				results=getFromNet(url);
+			}else {
+				return results;
+			}
+		} 
+		return results;
+	}
+
+	/**
+	 * 从网络获取json
+	 * @param url
+	 * @return  成功获取返回多个图片信息，否返回null
+	 */
+	private LinkedList<Result> getFromNet(String url) {
 		LinkedList<Result> results = null;
 		try {
 			String json = getJsonString(url);
@@ -66,7 +100,6 @@ public abstract class LoadDataTask extends
 							results);
 				}
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,10 +108,25 @@ public abstract class LoadDataTask extends
 	}
 
 	/**
+	 * 从本地获取json
+	 * 
+	 * @param url
+	 *            请求的url
+	 * @return LinkedList 成功获取返回多个图片信息，否返回null
+	 */
+	private LinkedList<Result> getFromDiskLruCache(String url) {
+		LinkedList<Result> results = null;
+		String key = TubaUtils.keyOfMD5(url);
+		results = (LinkedList<Result>) TubaUtils.getObjectFromDiskLruCache(
+				TuBaApp.mDiskLruCache, key);
+		return results;
+	}
+
+	/**
 	 * 发起网络请求，获取json字符串
 	 * 
 	 * @param url
-	 * @return
+	 * @return  String
 	 */
 	private String getJsonString(String url) {
 		String tempRul;
@@ -117,24 +165,39 @@ public abstract class LoadDataTask extends
 	@Override
 	protected void onProgressUpdate(Integer... values) {
 		// TODO Auto-generated method stub
+		
 		super.onProgressUpdate(values);
-		onDoingLoadData(values[0]);
+		
 
 	}
 
 	@Override
 	protected void onPostExecute(LinkedList<Result> results) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
+		if (listenner!=null) {
+			listenner.onLoadDataComplete(results);
+		}
+		Log.i(TAG, "onPostExecute");
 		super.onPostExecute(results);
-		onLoadDataComplete(results);
+		
+	}
+	
+	@Override
+	protected void onCancelled() {
+		// TODO Auto-generated method stub
+		if (listenner!=null) {
+			listenner.onCancelLoadData();
+		}
+		super.onCancelled();
 	}
 
 	/**
 	 * 解析json字符串
 	 * 
-	 * @param json 字符串
-	 *            
-	 * @return
+	 * @param json
+	 *            字符串
+	 * 
+	 * @return  LinkedList
 	 */
 	private LinkedList<Result> parseJson2Object(String json) {
 		// TODO Auto-generated method stub
@@ -150,24 +213,35 @@ public abstract class LoadDataTask extends
 		}
 		return null;
 	}
-
+	
 	/**
-	 * 加载数据之前
+	 * 设置数据加载的监听者
+	 * @param listenner
 	 */
-	public abstract void onPreLoadData();
-
-	/**
-	 * 正在加载数据
-	 * 
-	 * @param i
-	 */
-	public abstract void onDoingLoadData(Integer i);;
-
-	/**
-	 * 加载完成之后
-	 * 
-	 * @param results
-	 */
-	public abstract void onLoadDataComplete(LinkedList<Result> results);
+	public void setOnLoadDataTaskListenner(LoadDataTaskListenner listenner){
+		this.listenner=listenner;
+	}
+    /**
+     * 数据加载过程的监听者
+     * @author jack
+     *
+     */
+	public interface LoadDataTaskListenner{
+		/**
+		 * 加载数据之前
+		 */
+		void onPreLoadData();
+		
+		/**
+		 *线程被取消掉后的回调
+		 */
+		public abstract void onCancelLoadData();
+		/**
+		 * 加载完成之后
+		 * 
+		 * @param results
+		 */
+		public abstract void onLoadDataComplete(LinkedList<Result> results);
+	} 
 
 }

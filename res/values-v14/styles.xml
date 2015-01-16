@@ -1,5 +1,40 @@
 <resources>
 
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
 
+        <!-- ActionBar样式 -->
+        <item name="android:actionBarStyle">@style/CustomActionBar</item>
+        <!-- actionBar中menu的selector -->
+        <item name="android:actionBarItemBackground">@drawable/actionbar_bg_selector</item>
+        <!-- 下拉列表按钮的样式 -->
+        <item name="android:itemTextAppearance">@style/CustomActionBarOverflow</item>
+        
+        <item name="android:homeAsUpIndicator">@drawable/ic_menu_back</item>
+<!--         <item name="android:actionOverflowButtonStyle">@style/CustomActionButtonOverflow</item>   -->
+    </style>
 
+    <style name="CustomActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/gray_3</item>
+        <item name="android:titleTextStyle">@style/CustomeActionBarTitleText</item>
+    </style>
+
+    <style name="CustomeActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#cfcfcf</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="CustomActionBarOverflow" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!--
+    <style name="CustomActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">  
+        <item name="android:src">@drawable/actionbar_more_icon</item>  
+    </style> 
+    -->
+    <!-- 自定view的actionBar -->
+    <style name="CustomView_ActionBar" parent="@style/CustomActionBar">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    
 </resources>

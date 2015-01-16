@@ -8,10 +8,10 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.StreamCorruptedException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import libcore.io.DiskLruCache;
 import libcore.io.DiskLruCache.Snapshot;
@@ -126,9 +126,7 @@ public class TubaUtils {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		
+		}	
 		return object;
 	}
 	/**
@@ -319,5 +317,16 @@ public class TubaUtils {
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,  
                 ThumbnailUtils.OPTIONS_RECYCLE_INPUT);  
         return bitmap;  
+    }
+    
+    /**
+     * @param millis long型毫秒值
+     * @return  yyyy-MM-dd hh:mm:ss
+     */
+    public static String getDate(long millis){
+    	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+         Calendar calendar = Calendar.getInstance();
+         calendar.setTimeInMillis(millis);
+        return formatter.format(calendar.getTime());
     }
 }

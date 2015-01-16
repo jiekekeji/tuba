@@ -19,13 +19,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ShareActionProvider;
 
 import com.jack.tuba.utils.TubaUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 /**
  * 
  * @author Administrator
@@ -83,7 +86,7 @@ public class ImageDetailActivity extends Activity {
 				.showImageForEmptyUri(R.drawable.ic_empty)
 				.showImageOnFail(R.drawable.ic_error)
 				.resetViewBeforeLoading(true).cacheOnDisk(true)
-				.imageScaleType(ImageScaleType.EXACTLY)
+				.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
 				.bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true)
 				.displayer(new FadeInBitmapDisplayer(300)).build();
 
@@ -95,9 +98,26 @@ public class ImageDetailActivity extends Activity {
 	private void initPhotoView() {
 		photoView = (PhotoView) findViewById(R.id.iv_photo);
 		if (url != null) {
-			ImageLoader.getInstance().displayImage(url, photoView, options);
+//			ImageLoader.getInstance().displayImage(url, photoView, options);
+			int imgHeight=getIntent().getIntExtra("ivHeight",0);
+			int imgWidth=getIntent().getIntExtra("ivWidth", 0);
+			
+			
+			if (imgHeight!=0&&imgWidth!=0) {
+				ImageLoader.getInstance().loadImage(url,new ImageSize(imgWidth, 800), new ImgListener());
+			}
+			Log.i(TAG, "imgHeight="+imgHeight+"imgWidth="+imgWidth);
 		}
 
+	}
+	
+	class ImgListener extends SimpleImageLoadingListener{
+		@Override
+		public void onLoadingComplete(String imageUri, View view,
+				Bitmap loadedImage) {
+			photoView.setImageBitmap(loadedImage);
+			super.onLoadingComplete(imageUri, view, loadedImage);
+		}
 	}
 
 	@SuppressLint("NewApi")

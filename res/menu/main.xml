@@ -1,7 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.jack.tuba.MainActivity" >
-
     <item
         android:id="@+id/action_search"
         android:orderInCategory="100"

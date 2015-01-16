@@ -1,5 +1,7 @@
 package com.jack.tuba.widget;
 
+import org.w3c.dom.Text;
+
 import com.jack.tuba.R;
 
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /*
  * Copyright (C) 2012 Fabian Leon Ortega <http://orleonsoft.blogspot.com/,
@@ -43,6 +46,8 @@ public class PullAndLoadListView extends PullToRefreshListView {
 	private RelativeLayout mFooterView;
 	// private TextView mLabLoadMore;
 	private ProgressBar mProgressBarLoadMore;
+	//
+	private TextView mLabLoadMore;
 
 	public PullAndLoadListView(Context context) { super(context);
 	  initComponent(context); }
@@ -63,6 +68,8 @@ public class PullAndLoadListView extends PullToRefreshListView {
 		 */
 		mProgressBarLoadMore = (ProgressBar) mFooterView
 				.findViewById(R.id.load_more_progressBar);
+		
+		mLabLoadMore = (TextView) mFooterView.findViewById(R.id.load_more_lab_view);
 
 		addFooterView(mFooterView);
 	}
@@ -98,7 +105,7 @@ public class PullAndLoadListView extends PullToRefreshListView {
 			if (!mIsLoadingMore && loadMore && mRefreshState != REFRESHING
 					&& mCurrentScrollState != SCROLL_STATE_IDLE) {
 				mProgressBarLoadMore.setVisibility(View.VISIBLE);
-				// mLabLoadMore.setVisibility(View.VISIBLE);
+				 mLabLoadMore.setVisibility(View.GONE);
 				mIsLoadingMore = true;
 				onLoadMore();
 			}
@@ -119,6 +126,7 @@ public class PullAndLoadListView extends PullToRefreshListView {
 	public void onLoadMoreComplete() {
 		mIsLoadingMore = false;
 		mProgressBarLoadMore.setVisibility(View.GONE);
+		mLabLoadMore.setVisibility(View.VISIBLE);
 	}
 
 	/**

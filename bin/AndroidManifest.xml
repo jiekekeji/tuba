@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -22,60 +22,61 @@
         <uses-library android:name="android.test.runner" />
         <activity
             android:name=".MainActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MONKEY"/>
             </intent-filter>
         </activity>
         <activity 
             android:name=".ImageDetailActivity"
-            android:theme="@style/imageDetailTheme">            
+            android:theme="@style/AppTheme">            
         </activity>
         <activity 
             android:name=".MyDownLoadActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".RecommendAppActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".HelpActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".SettingActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".SuggestActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".AboutUsActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity 
             android:name=".ImageOrigin"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         <activity
             android:name=".MySingleDownLoadAtivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@@style/AppTheme"
             >
         </activity>
         <activity
             android:name=".SearchImageActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@style/AppTheme"
             >
         </activity>
         

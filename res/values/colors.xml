@@ -10,5 +10,121 @@
     <color name="white">#FFFFFF</color>
     <color name="light_white">#F0F0F0</color>
     <color name="transparent">#55ff</color>  
+    <color name="gray_3">#303537</color>
+    <color name="list_bg_color">#fff0f0f0</color>
+    <item type="color" name="channel_list_bg">@*android:color/black</item>
+    <color name="dim_gray">#ff707070</color>
+    <color name="gray">#ffb4b4b4</color>
+    <color name="light_black">#ff313131</color>
+    <item type="color" name="dark_brown">@color/light_black</item>
+    <color name="orange">#fffe8f40</color>
+    <color name="blue">#ffcaf2fe</color>
+    <color name="light_gray">#ff949494</color>
+    <color name="translucent">#50000000</color>
+    <color name="user_description">#ff7d7d7d</color>
+    <color name="highlight_at_user">#ff5c94c7</color>
+    <color name="red">#ffe40011</color>
+    <color name="dark_gray">#ff636363</color>
+    <color name="settings_attribute">#ff418bcc</color>
+    <color name="edit_view_bg">#ffffffff</color>
+    <color name="text_content">#ff000000</color>
+    <item type="color" name="settings_entry">@color/dark_brown</item>
+    <color name="message_dialog_text">#ff313131</color>
+    <item type="color" name="comment_screen_name">@color/message_dialog_text</item>
+    <color name="share_item_name">#ff535353</color>
+    <color name="share_item_bg_pressed">#fff0f0f0</color>
+    <color name="reader_item_content_read">#ffaaaaaa</color>
+    <color name="reader_item_content_read_night">#ff5a646e</color>
+    <color name="light_blue">#fff8fafc</color>
+    <color name="common_tab_indicator_line">#ff376db3</color>
+    <color name="comment_tab_indicator_line">#ff376db3</color>
+    <color name="comment_tab_title_selected_color">#ff3d6b8f</color>
+    <color name="comment_tab_title_normal_color">#ff313131</color>
+    <color name="comment_tab_title_normal_color_night">#ff7e8c9a</color>
+    <item type="color" name="top_bar_bg_color">@*android:color/white</item>
+    <color name="top_bar_btn_bg_pressed">#ffd5d5d5</color>
+    <item type="color" name="top_bar_title">@color/dark_brown</item>
+    <item type="color" name="top_bar_btn_text">@*android:color/white</item>
+    <color name="top_bar_btn_normal">#ff3a688b</color>
+    <color name="top_bar_btn_pressed">#ff235378</color>
+    <item type="color" name="user_screenname">@color/color_14</item>
+    <color name="user_desc">#ff646464</color>
+    <item type="color" name="user_info_btn_num">@color/user_screenname</item>
+    <item type="color" name="user_info_btn_desc">@color/color_10</item>
+    <color name="update_type_desc">#ff626262</color>
+    <color name="color_1">#ff535353</color>
+    <color name="color_2">#ffa9abaa</color>
+    <color name="color_3">#ffa5a5a5</color>
+    <color name="color_4">#ff7e8c99</color>
+    <color name="color_5">#ff362e2b</color>
+    <color name="color_6">#ff1e2123</color>
+    <color name="color_7">#ff434343</color>
+    <color name="color_8">#ff949494</color>
+    <color name="color_9">#ff5b656d</color>
+    <color name="color_10">#ff898989</color>
+    <color name="color_11">#ff000000</color>
+    <color name="color_12">#ff7e8c9a</color>
+    <color name="color_13">#ffffffff</color>
+    <color name="color_14">#ff313131</color>
+    <color name="color_15">#ff282d32</color>
+    <color name="color_16">#ff282f36</color>
+    <color name="color_17">#ff5c84a4</color>
+    <color name="color_18">#ff3d6b8f</color>
+    <color name="color_19">#ff626262</color>
+    <color name="color_20">#ff6b767f</color>
+    <color name="color_21">#ff59626b</color>
+    <color name="color_22">#ff5a636c</color>
+    <color name="color_23">#ff959595</color>
+    <color name="color_24">#ff2f2f2f</color>
+    <item type="color" name="popup_menu_item_text_day">@color/color_7</item>
+    <color name="dialog_line_day">#ffe5e5e5</color>
+    <color name="dialog_line_night">#ff222528</color>
+    <item type="color" name="popup_menu_item_bg_night">@color/dialog_line_night</item>
+    <item type="color" name="button_bg_night">@color/dialog_line_night</item>
+    <color name="highlight_clickable">#ff367ab7</color>
+    <color name="notification_bg">#fff8f8f8</color>
+    <color name="notification_more_list_item_text_clickable">#ff357cb4</color>
+    <color name="receiver_list_item_bg">#ff282d31</color>
+    <color name="seekbar_background_start">#ff878787</color>
+    <color name="seekbar_background_center">#ffbcbcbc</color>
+    <color name="seekbar_background_end">#ffd7d7d7</color>
+    <color name="seekbar_progress_start">#ff2a527a</color>
+    <color name="seekbar_progress_center">#ff4777a4</color>
+    <color name="seekbar_progress_end">#ff5a82a6</color>
+    <color name="seekbar_background_start_night">#ff5e676f</color>
+    <color name="seekbar_background_center_night">#ff586068</color>
+    <color name="seekbar_background_end_night">#ff525a61</color>
+    <color name="seekbar_progress_start_night">#ff2a527a</color>
+    <color name="seekbar_progress_center_night">#ff4777a4</color>
+    <color name="seekbar_progress_end_night">#ff5a82a6</color>
+    <color name="vpi__bright_foreground_holo_dark">#fff3f3f3</color>
+    <color name="vpi__bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+    <color name="top_bar_btn_disabled">#ffc8c8c8</color>
+    <item type="color" name="popup_line">@color/dialog_line_day</item>
+    <color name="top_bar_indicator_text_color_normal">#ffaaaaaa</color>
+    <color name="top_bar_indicator_text_color_selected">#ff376db3</color>
+    <color name="top_bar_indicator_separator_line">#ffdcdcdc</color>
+    <color name="dim_bg">#ff3a3f45</color>
+    <color name="dim_title">#ffb4b9bd</color>
+    <color name="dim_subtitle">#ff7c8389</color>
+    <color name="discuss_group_module_bg_pressed">#ff26292b</color>
+    <color name="thread_title">#ff282828</color>
+    <color name="thread_content">#ff8c8c8c</color>
+    <color name="discuss_group_detail_item_name">#ff787878</color>
+    <color name="discuss_group_detail_item_attribute">#ff282828</color>
+    <color name="discuss_group_member_screen_name">#ff313131</color>
+    <color name="discuss_group_member_item_description">#ff8d8c8c</color>
+    <color name="discuss_thread_item_desc">#ff969696</color>
+    <color name="publish_thread_content_separator">#ffe7e8ea</color>
+    <color name="discuss_group_header_line">#ff566472</color>
+    <color name="discuss_thread_comment_item_screen_name">#ff505050</color>
+    <color name="discuss_thread_comment_item_display_time">#ff969696</color>
+    <color name="discuss_thread_comment_item_content">#ff282828</color>
+    <color name="discuss_thread_comment_item_reply_content_bg_normal">#ffe6ebef</color>
+    <color name="discuss_thread_comment_item_reply_content_bg_pressed">#ffb8d0e3</color>
+    <color name="discuss_thread_comment_header_title">#ff282828</color>
+    <color name="discuss_thread_comment_header_owner_bg">#ffff0000</color>
+    <color name="discuss_thread_reply_content">#ff505050</color>
+    <color name="discuss_thread_publish_content">#ff282828</color>
   
 </resources>

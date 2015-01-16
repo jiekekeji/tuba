@@ -1,6 +1,6 @@
 package com.jack.tuba.widget;
 
-
+import com.jack.tuba.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,15 +12,13 @@ import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.jack.tuba.R;
+import android.widget.AbsListView.OnScrollListener;
 
 /*Copyright (C) 2011 Johan Nilsson <http://markupartist.com>
 

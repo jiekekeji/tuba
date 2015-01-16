@@ -2,13 +2,14 @@ package com.jack.tuba;
 
 import java.util.LinkedList;
 
-import libcore.io.DiskLruCache;
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -20,7 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
@@ -29,33 +30,44 @@ import com.jack.tuba.app.TuBaApp;
 import com.jack.tuba.domain.Result;
 import com.jack.tuba.utils.Constant;
 import com.jack.tuba.utils.LoadDataTask;
+import com.jack.tuba.utils.LoadDataTask.LoadDataTaskListenner;
 import com.jack.tuba.utils.TubaUtils;
-import com.jack.tuba.widget.PullUpAndDownListView;
-import com.jack.tuba.widget.PullUpAndDownListView.RefreshListener;
+import com.jack.tuba.widget.PullAndLoadListView;
+import com.jack.tuba.widget.PullAndLoadListView.OnLoadMoreListener;
+import com.jack.tuba.widget.PullToRefreshListView.OnRefreshListener;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
-public class MainActivity extends Activity implements OnItemClickListener {
+/**
+ * 入口类
+ * 
+ * @author jack
+ *
+ */
+@SuppressLint("NewApi")
+public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private static final String TAG = "MainActivity";
 	/**
 	 * item的信息
 	 */
 	private LinkedList<Result> mListItems;
-	
+	/**
+	 * UIL展示参数
+	 */
 	private DisplayImageOptions options;
 	/**
 	 * 上拉加载下一页，下拉加载上一页ListView
 	 */
-	private PullUpAndDownListView mListView;
-    /**
-     * 展示image的adapter
-     */
+	private PullAndLoadListView mListView;
+	/**
+	 * 展示image的adapter
+	 */
 	private ShowImageAdapter mImageAdapter;
-    /**
-     * 左侧菜单
-     */
+	/**
+	 * 左侧菜单
+	 */
 	private DrawerLayout mDrawerLayout;
 	/**
 	 * 左侧菜单列表
@@ -65,9 +77,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 * 左侧菜单开关
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
-	
+
 	private DrawerArrowDrawable drawerArrow;
-	
+
 	private boolean drawerArrowColor;
 	/**
 	 * 搜索关键字
@@ -82,15 +94,22 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 */
 	private int start = 0;
 	/**
-	 * 记录listVieew的状态：正在加载或者加载完成
+	 * 等待条
 	 */
-	private boolean isOnLoading=false;
-	/**
-	 * 是否是第一次加载数据
-	 */
-	private boolean isFirstLoading=true;
 	private ProgressBar mProgressBar;
-	
+	/**
+	 * 当listview为空时，显示的view
+	 */
+	private TextView emptyView;
+	/**
+	 * 加载数据的任务
+	 */
+	private LoadDataTask mDataTask;
+	/**
+	 * 是否第一次加载数据，用于判断是否需要显示进度条
+	 */
+	private Boolean isFirstLoadData = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -147,52 +166,45 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 * 
 	 */
 	class DrawerOnItemClickListener implements AdapterView.OnItemClickListener {
-
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			// TODO Auto-generated method stub
-			Intent intent;
 			switch (position) {
-			case 0:// 我的下载			
-				intent = new Intent(MainActivity.this, MyDownLoadActivity.class);
-				startActivity(intent);		
-				mDrawerLayout.closeDrawer(mDrawerList);
+			case 0:
+				openActivity(MyDownLoadActivity.class);
 				break;
-			case 1:// 应用推荐
-				intent = new Intent(MainActivity.this,
-						RecommendAppActivity.class);
-				startActivity(intent);
-				mDrawerLayout.closeDrawer(mDrawerList);
+			case 1:
+				openActivity(RecommendAppActivity.class);
+				;
 				break;
-			case 2:// 关于我们
-				intent = new Intent(MainActivity.this, AboutUsActivity.class);
-				startActivity(intent);
-				mDrawerLayout.closeDrawer(mDrawerList);
+			case 2:
+				openActivity(AboutUsActivity.class);
 				break;
-			case 3:// 意见反馈
-				intent = new Intent(MainActivity.this, SuggestActivity.class);
-				startActivity(intent);
-				mDrawerLayout.closeDrawer(mDrawerList);
+			case 3:
+				openActivity(SuggestActivity.class);
 				break;
 			case 4:// 设置中心
-				intent = new Intent(MainActivity.this, SettingActivity.class);
-				startActivity(intent);
-				mDrawerLayout.closeDrawer(mDrawerList);
+				openActivity(SettingActivity.class);
 				break;
 			case 5:// 查找更多
-				intent = new Intent(MainActivity.this, HelpActivity.class);
-				startActivity(intent);
-				mDrawerLayout.closeDrawer(mDrawerList);
+				openActivity(HelpActivity.class);
 				break;
 			default:
 				break;
 			}
 		}
 
+		private void openActivity(Class clazz) {
+			Intent intent = new Intent(MainActivity.this, clazz);
+			startActivity(intent);
+			mDrawerLayout.closeDrawer(mDrawerList);
+		}
+
 	}
 
-	@SuppressLint("NewApi")
+	/**
+	 * 显示actionbar的返回建
+	 */
 	private void initActionBar() {
 		// TODO Auto-generated method stub
 		ActionBar ab = getActionBar();
@@ -205,81 +217,100 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	 */
 	private void initView() {
 
-		mListItems = new LinkedList<Result>();
-		int[] xy = TubaUtils.getScreenXy(this);
-		mImageAdapter = new ShowImageAdapter(this, mListItems, options, xy[1],
-				xy[0]);
-
-		mListView = (PullUpAndDownListView) findViewById(R.id.list);
-		mListView.setAdapter(mImageAdapter);
+		mListView = (PullAndLoadListView) getListView();
 		mListView.setOnItemClickListener(this);
-		mListView.setRefreshListener(new MyRefreshListener());
-		
+
+		mListView.setOnLoadMoreListener(new MyOnloadMoreListener());
+		mListView.setOnRefreshListener(new MyRefreshDataListener());
+
 		mProgressBar = (ProgressBar) findViewById(R.id.main_pro_bar);
 
-		isFirstLoading=true;
-		refreshData(getUrl(q, rsz, start));
+		emptyView = (TextView) findViewById(R.id.empty);
+		emptyView.setVisibility(View.GONE);
+
+		getMoreData();
 
 	}
 
-	// "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=girl&rsz=8&start=10"
-	private String getUrl(String q,int rsz,int start) {
-		
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	@Override
+	protected void onStop() {
+		Log.i(TAG, "stop");
+		cancelDataTask();
+		super.onStop();
+	}
+
+	/**
+	 * 取消加载任务
+	 */
+	private void cancelDataTask() {
+		Log.i(TAG, "cancelDataTask");
+		if (mDataTask != null
+				&& mDataTask.getStatus() == AsyncTask.Status.RUNNING) {
+			mDataTask.cancel(true);
+			mDataTask = null;
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		Log.i(TAG, "onDestory");
+		cancelDataTask();
+		super.onDestroy();
+	}
+
+	/**
+	 * 构造请求地址
+	 * 
+	 * @param q
+	 *            关键字
+	 * @param rsz
+	 *            每页大小
+	 * @param start
+	 *            起始页码
+	 * @return String get请求地址
+	 */
+	private String getUrl(String q, int rsz, int start) {
 		StringBuffer buffer = new StringBuffer(Constant.homeUrl);
 		buffer.append("&q=").append(q).append("&rsz=").append(rsz)
 				.append("&start=").append(start);
-		start = start + rsz;		
+		start = start + rsz;
 		return buffer.toString();
-
 	}
 
 	/**
-	 * 上拉和下拉的监听者
+	 * 上拉加载更多的监听者 *
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author jack *
 	 */
-	class MyRefreshListener implements RefreshListener {
-
+	class MyOnloadMoreListener implements OnLoadMoreListener {
 		@Override
-		public void pullUp() {
-			loadUpPage();
+		public void onLoadMore() {
+			Log.i(TAG, "onLoadMore");
+			if (isFirstLoadData) {
+				mListView.onLoadMoreComplete();
+			}else {
+				getMoreData();
+			}
+			
 		}
-
-		@Override
-		public void pullDown() {
-			// TODO Auto-generated method stub
-			loadNexPage();
-		}	
-
 	}
+
 	/**
-	 * 加载上一页
+	 * 下拉更新数据
+	 * 
+	 * @author jack
 	 */
-	private void loadUpPage() {
-		if (isOnLoading) {
-			return;
+	class MyRefreshDataListener implements OnRefreshListener {
+		@Override
+		public void onRefresh() {
+			mListView.onRefreshComplete();
+			Log.i(TAG, "MyRefreshData");
 		}
-		start=start+rsz;
-		String nextUrl=getUrl(q, rsz, start);
-		isOnLoading=true;
-		refreshData(nextUrl);
-		Log.i(TAG, nextUrl);
-	}
-    /**
-     * 加载下一页	
-     */
-	private void loadNexPage() {
-		if (isOnLoading) {
-			return;
-		}
-		if (start>10) {
-			start=start-rsz;
-		}
-		String upUrl=getUrl(q, rsz, start);
-		isOnLoading=true;
-		refreshData(upUrl);
-		Log.i(TAG, upUrl);
 	}
 
 	/**
@@ -292,45 +323,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				.showImageForEmptyUri(R.drawable.ic_empty)
 				.showImageOnFail(R.drawable.ic_error)
 				.resetViewBeforeLoading(true).cacheOnDisk(true)
-				.imageScaleType(ImageScaleType.EXACTLY)
+				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true)
 				.displayer(new FadeInBitmapDisplayer(300)).build();
-	}
-
-	/**
-	 * 发起数据请求
-	 */
-	public void refreshData(String url) {
-
-		String key = TubaUtils.keyOfMD5(url);
-		/**
-		 * 从sd卡中拿，如果没有则判断网络是否ok,然后从网络拿
-		 */
-		LinkedList<Result> results = (LinkedList<Result>) TubaUtils
-				.getObjectFromDiskLruCache(TuBaApp.mDiskLruCache, key);
-
-		if (results != null && results.size() > 0) {
-			if (mListItems.size() > 0) {
-				mListItems.clear();
-				mListItems.addAll(results);
-			} else {
-				mListItems.addAll(results);
-			}
-			
-			if (isFirstLoading) {
-				mProgressBar.setVisibility(View.GONE);
-				isFirstLoading=false;
-			}
-			mImageAdapter.notifyDataSetChanged();
-			mListView.setSelection(1);
-			mListView.setRefreshComplete();
-			isOnLoading=false;
-
-		} else {
-			if (TubaUtils.isNetworkAvailable(this)) {
-				new MyLoadDataTask(TuBaApp.mDiskLruCache).execute(url);
-			}
-		}
 	}
 
 	@Override
@@ -344,36 +339,38 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
+		if (position == mListItems.size() + 1) {
+			return;
+		}
 		Intent intent = new Intent(this, ImageDetailActivity.class);
 		intent.putExtra("url", mListItems.get(position - 1).getUrl());
 		intent.putExtra("ivHeight", mListItems.get(position - 1).getHeight());
 		intent.putExtra("ivWidth", mListItems.get(position - 1).getWidth());
-		overridePendingTransition(R.anim.hold,R.anim.hold);
+		overridePendingTransition(R.anim.hold, R.anim.hold);
 		startActivity(intent);
-
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id=item.getItemId();
+		int id = item.getItemId();
 		switch (id) {
 		case android.R.id.home:
 			openOrCloseDrawerList();
 			break;
 		case R.id.action_search:
-			Intent i=new Intent(MainActivity.this,SearchImageActivity.class);
+			Intent i = new Intent(MainActivity.this, SearchImageActivity.class);
 			startActivityForResult(i, 0);
 			break;
 
 		default:
 			break;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
-    /**
-     * 左侧菜单开关
-     */
+
+	/**
+	 * 左侧菜单开关
+	 */
 	private void openOrCloseDrawerList() {
 		if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
 			mDrawerLayout.closeDrawer(mDrawerList);
@@ -394,51 +391,109 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	class MyLoadDataTask extends LoadDataTask {
+	/**
+	 * 获取更多
+	 */
+	private void getMoreData() {
+		mDataTask = new LoadDataTask(TuBaApp.mDiskLruCache, MainActivity.this);
+		mDataTask.setOnLoadDataTaskListenner(new MyoadDataTaskListenner());
+		String url = getUrl(q, rsz, start);
+		mDataTask.execute(url);
+	}
 
-		public MyLoadDataTask(DiskLruCache diskLruCache) {
-			super(diskLruCache);
-			// TODO Auto-generated constructor stub
-		}
+	/**
+	 * 加载更多的监听者
+	 * 
+	 * @author jack
+	 *
+	 */
+	class MyoadDataTaskListenner implements LoadDataTaskListenner {
 
 		@Override
 		public void onPreLoadData() {
 			// TODO Auto-generated method stub
-			if (isFirstLoading) {
+			if (isFirstLoadData) {
 				mProgressBar.setVisibility(View.VISIBLE);
 			}
-
 		}
 
 		@Override
-		public void onDoingLoadData(Integer i) {
+		public void onCancelLoadData() {
 			// TODO Auto-generated method stub
-
+			mListView.onLoadMoreComplete();
+			Log.i(TAG, "onCancelLoadData");
 		}
 
 		@Override
 		public void onLoadDataComplete(LinkedList<Result> results) {
-			// TODO Auto-generated method stub
-			if (isFirstLoading) {
-				mProgressBar.setVisibility(View.GONE);
-				isFirstLoading=false;
-			}
-			if (results != null && results.size() > 0) {
-				if (mListItems.size()>0) {
-					mListItems.clear();
-					mListItems.addAll(results);
-				}else {
-					mListItems.addAll(results);
+			if (results != null) {
+				if (mListItems == null) {
+					mListItems = results;
+					int[] xy = TubaUtils.getScreenXy(MainActivity.this);
+					mImageAdapter = new ShowImageAdapter(MainActivity.this,
+							mListItems, options, xy[1], xy[0]);
+					mListView.setAdapter(mImageAdapter);		
+				}else{
+					if (isFirstLoadData) {
+						mListItems.clear();
+						mListItems.addAll(results);
+						mImageAdapter.notifyDataSetChanged();
+						mListView.setSelection(1);
+					}else {
+						mListItems.addAll(results);
+					}					
 				}
-				mImageAdapter.notifyDataSetChanged();
-			}else {
-				Toast.makeText(MainActivity.this, "没有更多了", Toast.LENGTH_SHORT).show();
+				start = start + rsz;
+			} else {
+				if (mListItems == null) {
+					mProgressBar.setVisibility(View.GONE);
+					mListView.setEmptyView(emptyView);
+				}
 			}
-			mListView.setRefreshComplete();
-			mListView.setSelection(1);
-			isOnLoading=false;
+			mListView.onLoadMoreComplete();
+			Log.i(TAG, "onLoadDataComplete");
+			if (isFirstLoadData) {
+				mProgressBar.setVisibility(View.GONE);
+				isFirstLoadData=false;
+			}
+		}
+	}
+
+	/**
+	 * 刷新数据的任务
+	 * 
+	 * @author jack
+	 *
+	 */
+	class MyRefreshDataTask extends AsyncTask<Void, integer, Void> {
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			mListView.onRefreshComplete();
 		}
 
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		
+		if (resultCode==RESULT_OK) {
+			Log.i(TAG, "onActivityResult"+resultCode+data.getStringExtra("key"));
+			isFirstLoadData=true;
+			start=0;
+			rsz=8;
+			q=data.getStringExtra("key");
+			getMoreData();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 }

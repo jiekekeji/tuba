@@ -1,6 +1,7 @@
 package com.jack.tuba.app;
 
 import java.io.IOException;
+
 import libcore.io.DiskLruCache;
 import android.app.Application;
 import android.content.Context;
@@ -11,6 +12,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 
 
 public class TuBaApp extends Application {
@@ -37,6 +39,7 @@ public class TuBaApp extends Application {
 	@Override
 	public void onTerminate() {
 		// TODO Auto-generated method stub
+		ImageLoader.getInstance().destroy();
 		super.onTerminate();
 	}
 	

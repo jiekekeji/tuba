@@ -23,6 +23,9 @@
     <string name="share">share</string>
     <string name="action_set_wallpaper">设为壁纸</string>
     
+    <string name="load_more_post">没了，换个看看吧</string>
+    <string name="empty_listview">无法加载数据，请检查网络</string>
+    
     
 
 </resources>

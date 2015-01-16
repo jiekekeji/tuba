@@ -24,7 +24,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-
+/**
+ * 主页展示图片的adapter
+ * @author jack
+ *
+ */
 public class ShowImageAdapter extends BaseAdapter{
 	
 	private LayoutInflater inflater;
@@ -33,7 +37,7 @@ public class ShowImageAdapter extends BaseAdapter{
 	private ImageLoadingListener animateFirstListener;
 	private int displayHeight;
 	private int displayWidth;
-	private String TAG="CommonAdapter";
+	private static final String TAG=ShowImageAdapter.class.getName();
 	private Context context;
 	/**
 	 * 
@@ -117,22 +121,32 @@ public class ShowImageAdapter extends BaseAdapter{
 		int imageHeight=results.get(position).getHeight();
 		int imageWidth=results.get(position).getWidth();
 		
+		Log.i(TAG, "trueheight"+imageHeight);
+		Log.i(TAG, "truewidth"+imageWidth);
+		
+		Log.i(TAG, "displayheight"+displayHeight);
+		Log.i(TAG, "tdisplaywidth"+displayWidth);
+		
+		
 		if (imageWidth>=displayWidth) {
 			float sca=imageWidth/displayWidth;
-			
+			Log.i(TAG, "sca"+sca);
 			holder.image.getLayoutParams().width=displayWidth;
-			holder.image.getLayoutParams().height=(int) (imageHeight/sca);
+			holder.image.getLayoutParams().height=(int) (imageHeight/sca+0.5);
 		}else {
-			float sca=displayHeight/imageHeight;
+			float sca=displayWidth/imageWidth;
+			Log.i(TAG, "sca"+sca);
 			holder.image.getLayoutParams().width=displayWidth;
-			holder.image.getLayoutParams().height=(int) (imageHeight*sca);
+			holder.image.getLayoutParams().height=(int) (imageHeight*sca+0.5);
 		}
-//		holder.title.getLayoutParams().width=LayoutParams.MATCH_PARENT;
-//		holder.title.getLayoutParams().height=45;
-//		
-//		holder.moreUrl.getLayoutParams().width=LayoutParams.MATCH_PARENT;
-//		holder.moreUrl.getLayoutParams().height=45;
-		
+////		holder.title.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+////		holder.title.getLayoutParams().height=45;
+////		
+////		holder.moreUrl.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+////		holder.moreUrl.getLayoutParams().height=45;
+		Log.i(TAG, "lastheight"+holder.image.getLayoutParams().height);
+		Log.i(TAG, "lastwidth"+holder.image.getLayoutParams().width);
+		Log.i(TAG, "============================================");
 	    holder.title.setText(results.get(position).getTitleNoFormatting());
 	    holder.moreUrl.setText("点击查看图片来源");
 		
