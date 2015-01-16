@@ -13,6 +13,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreConnectionPNames;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -72,11 +73,14 @@ public class LoadDataTask extends
 		LinkedList<Result> results = null;
 		results=getFromDiskLruCache(url);
 		if (results!=null&&results.size()>0) {
+			Log.i(TAG, "getFromDiskLruCache");
 			return results;
 		}else{
 			if (TubaUtils.isNetworkAvailable(context)) {
 				results=getFromNet(url);
+				Log.i(TAG, "getFromNet");
 			}else {
+				Log.i(TAG, "nothing");
 				return results;
 			}
 		} 
@@ -91,7 +95,9 @@ public class LoadDataTask extends
 	private LinkedList<Result> getFromNet(String url) {
 		LinkedList<Result> results = null;
 		try {
+			Log.i(TAG, "getJson");
 			String json = getJsonString(url);
+			Log.i(TAG, json);
 			if (json != null) {
 				results = parseJson2Object(json);
 				if (results != null) {
@@ -132,12 +138,16 @@ public class LoadDataTask extends
 		String tempRul;
 		StringBuilder builder;
 		try {
+			Log.i(TAG, " getJsonString");
 			tempRul = URLDecoder.decode(url, "utf-8");
 			HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(tempRul);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 3000); 
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 3000);
+		   
 			HttpResponse response = client.execute(get);
 			int code = response.getStatusLine().getStatusCode();
-			if (code == 200) {
+			if (code == 200) { 
 				InputStream in = response.getEntity().getContent();
 				int length = 0;
 				byte[] b = new byte[1024];

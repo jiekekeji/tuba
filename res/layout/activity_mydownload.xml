@@ -4,9 +4,21 @@
     android:layout_height="match_parent" >
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:padding="10dp"
         android:id="@+id/swipemenulistview."
+        android:divider="@color/light_white"
+        android:dividerHeight="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+   <TextView
+            android:id="@+id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/lv_image_selector"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/empty_download"
+            />
 
     <FrameLayout
         android:id="@+id/frame_progress_bar"

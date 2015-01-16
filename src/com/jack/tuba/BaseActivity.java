@@ -1,12 +1,8 @@
 package com.jack.tuba;
 
-import java.lang.reflect.Method;
-
-import android.app.ActionBar;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 
 public class BaseActivity extends Activity{
 
@@ -16,6 +12,19 @@ public class BaseActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+
+		default:
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 }

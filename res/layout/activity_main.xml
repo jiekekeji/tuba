@@ -14,15 +14,15 @@
             android:background="@drawable/lv_image_selector"
             android:divider="@android:color/transparent"
             android:dividerHeight="10dp" />
+
         <TextView
             android:id="@+id/empty"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@drawable/lv_image_selector"
             android:gravity="center"
-            android:visibility="gone"
             android:text="@string/empty_listview"
-            />
+            android:visibility="gone" />
 
         <!-- The navigation drawer -->
 

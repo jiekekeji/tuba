@@ -4,10 +4,14 @@ import uk.co.senab.photoview.PhotoView;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.jack.tuba.utils.TubaUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MySingleDownLoadAtivity extends Activity{
+
+	private static final String TAG = MySingleDownLoadAtivity.class.getName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +26,11 @@ public class MySingleDownLoadAtivity extends Activity{
 		// TODO Auto-generated method stub
 		PhotoView photoView=(PhotoView) findViewById(R.id.download_iv_photo);
 		String path=getIntent().getStringExtra("path");
-		int[] xy=TubaUtils.getScreenXy(this);
-		Bitmap bitmap=TubaUtils.getImageThumbnail(path, xy[0], xy[1]);
-		photoView.setImageBitmap(bitmap);
+//		ImageLoader.getInstance().displayImage(path, photoView);
+		ImageLoader.getInstance().displayImage(path, photoView);
+		Log.i(TAG, path);
+//		int[] xy=TubaUtils.getScreenXy(this);
+//		Bitmap bitmap=TubaUtils.getImageThumbnail(path, xy[0], xy[1]);
+//		photoView.setImageBitmap(bitmap);
 	}
 }

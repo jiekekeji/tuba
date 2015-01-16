@@ -20,21 +20,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ShareActionProvider;
 
 import com.jack.tuba.utils.TubaUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 /**
  * 
  * @author Administrator
  *
  */
-public class ImageDetailActivity extends Activity {
+public class ImageDetailActivity extends Activity implements OnClickListener {
 
 	private static final String TAG = ImageDetailActivity.class.getName();
 	/**
@@ -84,9 +86,8 @@ public class ImageDetailActivity extends Activity {
 		options = new DisplayImageOptions.Builder()
 				.showImageOnLoading(R.drawable.empty_photo)
 				.showImageForEmptyUri(R.drawable.ic_empty)
-				.showImageOnFail(R.drawable.ic_error)
 				.resetViewBeforeLoading(true).cacheOnDisk(true)
-				.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true)
 				.displayer(new FadeInBitmapDisplayer(300)).build();
 
@@ -98,26 +99,43 @@ public class ImageDetailActivity extends Activity {
 	private void initPhotoView() {
 		photoView = (PhotoView) findViewById(R.id.iv_photo);
 		if (url != null) {
-//			ImageLoader.getInstance().displayImage(url, photoView, options);
-			int imgHeight=getIntent().getIntExtra("ivHeight",0);
-			int imgWidth=getIntent().getIntExtra("ivWidth", 0);
+			ImageLoader.getInstance().displayImage(url,photoView,options,new ImgListener());
+		}
+	}
+	/**
+	 * 图片加载监听器
+	 * @author jack
+	 *
+	 */
+	class ImgListener implements ImageLoadingListener{
+
+		@Override
+		public void onLoadingCancelled(String arg0, View arg1) {
+			// TODO Auto-generated method stub
 			
-			
-			if (imgHeight!=0&&imgWidth!=0) {
-				ImageLoader.getInstance().loadImage(url,new ImageSize(imgWidth, 800), new ImgListener());
-			}
-			Log.i(TAG, "imgHeight="+imgHeight+"imgWidth="+imgWidth);
 		}
 
-	}
-	
-	class ImgListener extends SimpleImageLoadingListener{
 		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			photoView.setImageBitmap(loadedImage);
-			super.onLoadingComplete(imageUri, view, loadedImage);
+		public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
+			// TODO Auto-generated method stub
+			
 		}
+
+		@Override
+		public void onLoadingFailed(String arg0, View view, FailReason arg2) {
+			// TODO Auto-generated method stub
+			PhotoView pView=(PhotoView) view;
+			pView.getLayoutParams().height=LayoutParams.WRAP_CONTENT;
+			pView.getLayoutParams().width=LayoutParams.WRAP_CONTENT;
+			pView.setImageResource(R.drawable.ic_fail);
+		}
+
+		@Override
+		public void onLoadingStarted(String arg0, View arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 	@SuppressLint("NewApi")
@@ -286,5 +304,11 @@ public class ImageDetailActivity extends Activity {
 		}else {
 			return null;
 		}	
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	
 	}
 }

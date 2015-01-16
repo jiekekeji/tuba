@@ -25,6 +25,7 @@
     
     <string name="load_more_post">没了，换个看看吧</string>
     <string name="empty_listview">无法加载数据，请检查网络</string>
+    <string name="empty_download">下载图片为空</string>
     
     
 

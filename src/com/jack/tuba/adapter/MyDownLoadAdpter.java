@@ -66,7 +66,7 @@ public class MyDownLoadAdpter extends BaseAdapter {
 		}
 		
 		holder.tv_name.setText(tempFile.getName());
-		holder.tv_length.setText(String.valueOf(tempFile.length()));
+		holder.tv_length.setText(String.valueOf(tempFile.length()/1024+"k"));
 		return convertView;
 	}
 

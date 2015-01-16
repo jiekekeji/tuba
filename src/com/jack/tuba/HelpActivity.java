@@ -1,10 +1,9 @@
 package com.jack.tuba;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class HelpActivity extends Activity{
+public class HelpActivity extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +17,8 @@ public class HelpActivity extends Activity{
 		// TODO Auto-generated method stub
 		return super.onCreateOptionsMenu(menu);
 	}
+
+	
+
 
 }

@@ -2,13 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_white"
-    android:padding="4dp" >
-
-    <RelativeLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    android:background="@drawable/lv_image_selector" >
 
         <ImageView
             android:id="@+id/iv_icon"
@@ -23,8 +17,8 @@
             android:layout_alignBottom="@+id/iv_icon"
             android:layout_marginLeft="3dp"
             android:layout_toRightOf="@+id/iv_icon"
-            android:textColor="@android:color/black"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_icom_name"
@@ -36,7 +30,5 @@
             android:text="name"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
-
-    </RelativeLayout>
-
+   
 </RelativeLayout>
