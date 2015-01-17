@@ -2,6 +2,7 @@ package com.jack.tuba;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -174,10 +175,11 @@ public class MyDownLoadActivity extends Activity implements
 	 */
 	private void openImg(int position) {
 		// TODO Auto-generated method stub
-		File file = imageList.get(position);
-		String path = file.getAbsolutePath();
-		Intent intent = new Intent(this, MySingleDownLoadAtivity.class);
-		intent.putExtra("path", path);
+//		File file = imageList.get(position);
+//		String path = file.getAbsolutePath();
+		Intent intent = new Intent(this, DoadImgActivity.class);
+		intent.putExtra("position",position);
+		intent.putExtra("files", (Serializable)imageList);
 		startActivity(intent);
 	}
 

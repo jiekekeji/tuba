@@ -114,10 +114,23 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		checkKey();
 		initOptions();
 		initActionBar();
 		initDrawerMenu();
 		initView();
+	}
+	
+	
+   /**
+    * 设置搜索词
+    */
+	private void checkKey() {
+		// TODO Auto-generated method stub
+		String k=getIntent().getStringExtra("key");
+		if (k!=null&&!k.equals("")) {
+			q=k;
+		}
 	}
 
 	/**

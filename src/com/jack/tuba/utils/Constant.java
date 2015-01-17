@@ -6,7 +6,7 @@ public class Constant {
 	 * 侧滑菜单
 	 */
 	public static final String[] menuItem = new String[] { "我的下载", "应用推荐",
-			"关于我们", "意见反馈", "设置中心", "查找更多", };
+			"关于我们", "意见反馈", "设置中心", "功能介绍","我的网盘" };
 	/**
 	 * url请求主地址
 	 */

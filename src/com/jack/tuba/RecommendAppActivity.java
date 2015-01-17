@@ -1,10 +1,9 @@
 package com.jack.tuba;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class RecommendAppActivity extends Activity{
+public class RecommendAppActivity extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

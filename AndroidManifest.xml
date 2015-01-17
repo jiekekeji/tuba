@@ -69,16 +69,19 @@
             android:theme="@style/AppTheme"
             >
         </activity>
-        <activity
-            android:name=".MySingleDownLoadAtivity"
-            android:theme="@@style/AppTheme"
-            >
-        </activity>
+
         <activity
             android:name=".SearchImageActivity"
             android:theme="@style/AppTheme"
             >
         </activity>
+         <activity
+            android:name=".DoadImgActivity"
+            android:theme="@style/AppTheme"
+            >
+        </activity>
+        
+       
         
         
         
