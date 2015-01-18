@@ -119,6 +119,7 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 		initActionBar();
 		initDrawerMenu();
 		initView();
+		
 	}
 	
 	
@@ -292,8 +293,11 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 		buffer.append("&q=").append(q).append("&rsz=").append(rsz)
 				.append("&start=").append(start);
 		start = start + rsz;
+		
 		return buffer.toString();
 	}
+	
+	
 
 	/**
 	 * 上拉加载更多的监听者 *

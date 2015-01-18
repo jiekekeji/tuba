@@ -329,4 +329,17 @@ public class TubaUtils {
          calendar.setTimeInMillis(millis);
         return formatter.format(calendar.getTime());
     }
+    
+    /**
+     * 保存请求地址，可以调用一次，然后保存在内存中，不需要多次调用
+     * @param q
+     * @param rsz
+     * @param start
+     * @return
+     */
+//    private native String getMainUrl(String q, int rsz, int start);
+//     
+//    static{
+//    	System.loadLibrary("url");
+//    }
 }

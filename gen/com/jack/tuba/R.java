@@ -15,6 +15,20 @@ public final class R {
         public static final int menu_item=0x7f050000;
     }
     public static final class attr {
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int settimg=0x7f010001;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int settimg_src=0x7f010000;
     }
     public static final class color {
         public static final int actionbar_color=0x7f060005;
@@ -185,9 +199,9 @@ public final class R {
         public static final int progress_bar_states=0x7f020014;
     }
     public static final class id {
-        public static final int action_download=0x7f0b002a;
-        public static final int action_search=0x7f0b002b;
-        public static final int action_share=0x7f0b0028;
+        public static final int action_download=0x7f0b002b;
+        public static final int action_search=0x7f0b002c;
+        public static final int action_share=0x7f0b0029;
         public static final int bar=0x7f0b000b;
         public static final int center_img=0x7f0b0011;
         public static final int drawer_layout=0x7f0b0005;
@@ -202,9 +216,9 @@ public final class R {
         public static final int iv_icon=0x7f0b0014;
         public static final int iv_item_image_list_big=0x7f0b0012;
         public static final int iv_photo=0x7f0b0003;
-        public static final int load_more_footer=0x7f0b001f;
-        public static final int load_more_lab_view=0x7f0b0022;
-        public static final int load_more_progressBar=0x7f0b0021;
+        public static final int load_more_footer=0x7f0b0020;
+        public static final int load_more_lab_view=0x7f0b0023;
+        public static final int load_more_progressBar=0x7f0b0022;
         public static final int loading=0x7f0b0018;
         public static final int main_pro_bar=0x7f0b0008;
         public static final int more_image=0x7f0b0013;
@@ -212,18 +226,19 @@ public final class R {
         public static final int pager=0x7f0b0004;
         public static final int pb=0x7f0b0000;
         public static final int photo_par=0x7f0b0002;
-        public static final int pull_to_refresh_header=0x7f0b0023;
-        public static final int pull_to_refresh_image=0x7f0b0025;
-        public static final int pull_to_refresh_progress=0x7f0b0024;
-        public static final int pull_to_refresh_text=0x7f0b0026;
-        public static final int pull_to_refresh_updated_at=0x7f0b0027;
+        public static final int pull_to_refresh_header=0x7f0b0024;
+        public static final int pull_to_refresh_image=0x7f0b0026;
+        public static final int pull_to_refresh_progress=0x7f0b0025;
+        public static final int pull_to_refresh_text=0x7f0b0027;
+        public static final int pull_to_refresh_updated_at=0x7f0b0028;
         public static final int search=0x7f0b001b;
         public static final int search_back=0x7f0b0019;
         public static final int search_history_list=0x7f0b000d;
         public static final int search_suggest=0x7f0b000c;
-        public static final int set_wallpaper=0x7f0b0029;
+        public static final int set_wallpaper=0x7f0b002a;
+        public static final int setting_imageView=0x7f0b001f;
         public static final int swipemenulistview_=0x7f0b0009;
-        public static final int top_line=0x7f0b0020;
+        public static final int top_line=0x7f0b0021;
         public static final int tv_gridview_item=0x7f0b001c;
         public static final int tv_history_item=0x7f0b001d;
         public static final int tv_icom_name=0x7f0b0016;
@@ -250,9 +265,11 @@ public final class R {
         public static final int item_search_actionbar=0x7f030010;
         public static final int item_search_gridview=0x7f030011;
         public static final int item_search_history=0x7f030012;
-        public static final int widget_history_load_more_footer=0x7f030013;
-        public static final int widget_load_more_footer=0x7f030014;
-        public static final int widget_pull_to_refresh_header=0x7f030015;
+        public static final int item_setting=0x7f030013;
+        public static final int item_setting_two=0x7f030014;
+        public static final int widget_history_load_more_footer=0x7f030015;
+        public static final int widget_load_more_footer=0x7f030016;
+        public static final int widget_pull_to_refresh_header=0x7f030017;
     }
     public static final class menu {
         public static final int image_detail_menu=0x7f0a0000;
@@ -316,4 +333,58 @@ public final class R {
         public static final int CustomeActionBarTitleText=0x7f090006;
         public static final int imageDetailTheme=0x7f090004;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a ImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ImageView_settimg_src com.jack.tuba:settimg_src}</code></td><td></td></tr>
+           </table>
+           @see #ImageView_settimg_src
+         */
+        public static final int[] ImageView = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.jack.tuba.R.attr#settimg_src}
+          attribute's value can be found in the {@link #ImageView} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          @attr name com.jack.tuba:settimg_src
+        */
+        public static final int ImageView_settimg_src = 0;
+        /** Attributes that can be used with a TextVIew.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TextVIew_settimg com.jack.tuba:settimg}</code></td><td></td></tr>
+           </table>
+           @see #TextVIew_settimg
+         */
+        public static final int[] TextVIew = {
+            0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.jack.tuba.R.attr#settimg}
+          attribute's value can be found in the {@link #TextVIew} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jack.tuba:settimg
+        */
+        public static final int TextVIew_settimg = 0;
+    };
 }

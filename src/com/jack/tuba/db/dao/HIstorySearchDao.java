@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.session.PlaybackState.CustomAction;
 
 import com.jack.tuba.db.HistorySearchHelper;
 import com.jack.tuba.domain.HistorySearch;
