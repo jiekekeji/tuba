@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ImageView">
+        <attr name="settimg_src" format="reference|color" />
+        
+    </declare-styleable>
+ <declare-styleable name="TextVIew">
+    <attr name="settimg" format="string"></attr>
+ </declare-styleable>
+
+</resources>
